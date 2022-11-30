@@ -1,0 +1,59 @@
+/** @format */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* font */
+@font-face {
+  font-family: "Charmonman";
+  src: url("assets/fonts/Charmonman-Regular.ttf");
+}
+@font-face {
+  font-family: "Charmonman";
+  font-weight: bold;
+  src: url("assets/fonts/Charmonman-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("assets/fonts/Poppins-Regular.ttf");
+}
+@font-face {
+  font-family: "Poppins";
+  font-weight: bold;
+  src: url("assets/fonts/Poppins-Bold.ttf");
+}
+
+/* input */
+input[type="radio"] + label span {
+  transition: background 0.2s, transform 0.2s;
+}
+
+input[type="radio"] + label span:hover,
+input[type="radio"] + label:hover span {
+  transform: scale(1.2);
+}
+
+input[type="radio"]:checked + label span {
+  background-color: #3490dc;
+  box-shadow: 0px 0px 0px 2px white inset;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #3490dc;
+  border-radius: 10px;
+}
