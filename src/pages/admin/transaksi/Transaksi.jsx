@@ -2,10 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import SkletonTable from "../../../components/loading/SkletonTable";
-import Paginate from "../../../components/paginate/Paginate";
 import Search from "../../../components/search/Search";
 import Table from "../../../components/table/Table";
 import toastSuccess from "../../../services/toast-success";
@@ -19,26 +18,33 @@ const Transaksi = () => {
   const [showModal, setShowModal] = useState(false);
   const [search, setSearch] = useState("");
   const [dataEdit, setDataEdit] = useState({});
-  const [cekEdit, setCekEdit] = useState(true);
+  const [cekEdit, setCekEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   // params
-  const { id } = useParams();
+  const { jenis } = useParams();
   // useEffect
   useEffect(() => {
     const fetch = async () => {
-      await setTransaksi({ search }, id);
+      await setTransaksi({ search }, jenis);
       setIsLoading(false);
     };
     fetch();
-  }, [setTransaksi, search, id]);
+  }, [setTransaksi, search, jenis]);
   // table
-  const headers = ["No", "Unit", "Uraian", "Tanggal", "Aksi"];
-  const tableBodies = [`item.nama`, "ket", "tgl_transaksi"];
+  const headers = ["No", "Unit", "Uraian", "Tanggal", "Jumlah", "Aksi"];
+  const tableBodies = [`item.nama`, "ket", "tgl_transaksi", "jumlah"];
+  // navigate
+  const navigate = useNavigate();
 
   const handleEdit = (item) => {
     setCekEdit(true);
     setDataEdit(item);
     setShowModal(true);
+  };
+
+  const setLihat = (row) => {
+    console.log("lihat", row);
+    navigate(`/admin/transaksi/${jenis}/${row.id}`);
   };
 
   const handleDelete = async (id) => {
@@ -69,14 +75,15 @@ const Transaksi = () => {
       <Form
         showModal={showModal}
         setShowModal={setShowModal}
-        judul="Unit"
+        judul={jenis}
         dataEdit={dataEdit}
         cekEdit={cekEdit}
+        jenis={jenis}
         setPesan={toastSuccess}
       />
       {/* header */}
       <div className="flex justify-between mb-2">
-        <p>Silahkan menambah, merubah dan menghapus data {id}</p>
+        <p>Silahkan menambah, merubah dan menghapus data {jenis}</p>
         <button
           className="bg-biru text-white active:bg-biru font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button"
@@ -109,7 +116,7 @@ const Transaksi = () => {
                 tableBodies={tableBodies}
                 setEdit={handleEdit}
                 setDelete={handleDelete}
-                setLihat={true}
+                setLihat={setLihat}
               />
             </div>
             {/* paginate */}

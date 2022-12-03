@@ -1,7 +1,13 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import useItem from "../../../store/crud/item";
+import DatePickComp from "../../../components/date/DatePickComp";
+import SelectItem from "../../../components/select/SelectItem";
+import useTransaksi from "../../../store/crud/transaksi";
+import moment from "moment";
+// import Rupiah from "../../../components/mask/Rupiah";
+import { NumericFormat } from "react-number-format";
+import Rupiah from "../../../components/mask/Rupiah";
 
 const Form = ({
   showModal,
@@ -10,23 +16,43 @@ const Form = ({
   dataEdit,
   cekEdit,
   setPesan,
+  jenis,
 }) => {
   // store
-  const { addData, updateData } = useItem();
+  const { addData, updateData } = useTransaksi();
   // state
-  const [nama, setNama] = useState("");
+  const [ket, setKet] = useState("");
+  const [pilihItem, setPilihItem] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [jumlah, setJumlah] = useState("");
   // effect
   useEffect(() => {
     if (cekEdit) {
-      return dataEdit.nama && setNama(dataEdit.nama);
+      return (
+        dataEdit.ket && setKet(dataEdit.ket),
+        dataEdit.jumlah && setJumlah(`Rp. ${dataEdit.jumlah}`),
+        dataEdit.item &&
+          setPilihItem({
+            value: dataEdit.item.id,
+            label: dataEdit.item.nama,
+          }),
+        dataEdit.tgl_transaksi && setDate(new Date(dataEdit.tgl_transaksi))
+      );
     }
-    setNama("");
+    setKet("");
+    setJumlah("");
+    setDate(new Date());
   }, [cekEdit, dataEdit]);
 
   // ketika tombol simpan ditekan
   const handleSimpan = async (e) => {
+    const tgl_transaksi = moment(date).format("YYYY-MM-DD");
     const items = {
-      nama,
+      item_id: pilihItem.value,
+      tgl_transaksi,
+      ket,
+      jenis,
+      jumlah: jumlah.replace(/\D/g, ""),
     };
     e.preventDefault();
     let cek;
@@ -41,7 +67,7 @@ const Form = ({
       setPesan(cek.data);
     }
     if (cek.status === "berhasil") {
-      setNama("");
+      setKet("");
     }
   };
   return (
@@ -69,16 +95,38 @@ const Form = ({
                 {/*body*/}
                 <div className="relative px-6 py-3 flex-auto max-h-96">
                   <form onSubmit={handleSimpan}>
-                    <div className="mb-3 pt-0 flex flex-col gap-2">
-                      <label htmlFor="nama">Nama Unit</label>
+                    {/* Item */}
+                    <div className="col-span-12 md:col-span-6 mb-3 pt-0 flex flex-col gap-2">
+                      <label htmlFor="Item_id">Unit</label>
+                      <SelectItem
+                        setPilihItem={setPilihItem}
+                        pilihItem={pilihItem}
+                      />
+                    </div>
+                    {/* Ket */}
+                    <div className="col-span-12 md:col-span-6 mb-3 pt-0 flex flex-col gap-2">
+                      <label htmlFor="ket">Uraian</label>
                       <input
-                        value={nama}
-                        onChange={(e) => setNama(e.target.value)}
-                        id="nama"
+                        value={ket}
+                        onChange={(e) => setKet(e.target.value)}
+                        id="ket"
                         type="text"
                         className="px-3 py-2 text-slate-600 relative bg-white rounded text-sm border shadow outline-none focus:outline-none focus:ring w-full"
-                        required
                       />
+                    </div>
+                    {/* Tgl */}
+                    <div className="col-span-12 md:col-span-6 mb-3 pt-0 flex flex-col gap-2">
+                      <label htmlFor="ket">Tanggal</label>
+                      <DatePickComp
+                        selected={date}
+                        onChange={setDate}
+                        dateFormat="dd MMMM yyyy"
+                      />
+                    </div>
+                    {/* Jumlah */}
+                    <div className="col-span-12 md:col-span-6 mb-3 pt-0 flex flex-col gap-2">
+                      <label htmlFor="jumlah">Jumlah</label>
+                      <Rupiah setJumlah={setJumlah} jumlah={jumlah} />
                     </div>
                   </form>
                 </div>

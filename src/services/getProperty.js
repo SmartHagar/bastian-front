@@ -18,7 +18,7 @@ const getProperty = (obj, prop) => {
     if (typeof obj === "object") {
       return obj ? obj[last] : "";
     }
-    if (prop === "harga") {
+    if (prop === "jumlah") {
       return showRupiah(obj);
     }
     if (prop === "path") {

@@ -58,7 +58,8 @@ const useTransaksi = create(
         };
       } catch (error) {
         return {
-          status: `Error ${error}`,
+          status: "error",
+          error: error.response.data,
         };
       }
     },

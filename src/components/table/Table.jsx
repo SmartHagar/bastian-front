@@ -17,7 +17,7 @@ const Table = ({
   };
   return (
     <div>
-      <div className="overflow-x-auto relative rounded-lg shadow-lg">
+      <div className="overflow-x-auto relative rounded-lg shadow-lg max-h-[70vh]">
         <table className="w-full text-sm text-left text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-100">
             <tr>
@@ -54,9 +54,9 @@ const Table = ({
                         <button
                           onClick={() => setLihat(row)}
                           type="button"
-                          className="py-2 px-3 text-xs text-center text-biru hover:text-black border border-biru hover:bg-biru focus:ring-1 rounded-lg"
+                          className="py-2 px-3 text-xs text-center text-biru hover:text-white border border-biru hover:bg-biru focus:ring-1 rounded-lg"
                         >
-                          Kwitansi
+                          Gambar
                         </button>
                       )}
 
