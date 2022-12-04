@@ -15,6 +15,8 @@ import UnitAdmin from "../pages/admin/unit/Unit";
 import IndexAdmin from "../pages/admin/IndexAdmin";
 import TransaksiAdmin from "../pages/admin/transaksi/Transaksi";
 import GambarAdmin from "../pages/admin/gambar/Gambar";
+import KwitansiAdmin from "../pages/admin/kwitansi/Kwitansi";
+import BukuKasAdmin from "../pages/admin/buku-kas/BukuKas";
 
 // auth pages
 import CekLogin from "../pages/auth/CekLogin";
@@ -63,6 +65,8 @@ const MyRoutes = () => {
             <Route path=":jenis" element={<TransaksiAdmin />} />
             <Route path=":jenis/:transaksi_id" element={<GambarAdmin />} />
           </Route>
+          <Route path="kwitansi" element={<KwitansiAdmin />} />
+          <Route path="buku-kas" element={<BukuKasAdmin />} />
         </Route>
         {/* ketua pages */}
         <Route path="ketua" element={<IndexKetua />}>
