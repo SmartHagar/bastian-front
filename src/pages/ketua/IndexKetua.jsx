@@ -16,7 +16,7 @@ const IndexKetua = () => {
         navigate("/admin/dashboard");
       }
     } else {
-      navigate("/user/dashboard");
+      navigate("/auth/login");
     }
   }, []);
   return (

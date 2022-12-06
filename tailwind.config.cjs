@@ -18,6 +18,7 @@ module.exports = {
       },
       backgroundImage: {
         logo: "url('/src/assets/gambar/uogp.png')",
+        "bg-2": "url('/src/assets/gambar/bg-2.jpg')",
       },
     },
   },

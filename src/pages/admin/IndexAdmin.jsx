@@ -7,18 +7,18 @@ import Sidebar from "../../components/roles/admin/sidebar/Sidebar";
 
 const IndexAdmin = () => {
   // navigate
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   const user_login = JSON.parse(localStorage.getItem("user_login"));
-  //   if (user_login) {
-  //     const { role } = user_login;
-  //     if (role === "ketua") {
-  //       navigate("/ketua/dashboard");
-  //     }
-  //   } else {
-  //     navigate("/user/dashboard");
-  //   }
-  // }, []);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const user_login = JSON.parse(localStorage.getItem("user_login"));
+    if (user_login) {
+      const { role } = user_login;
+      if (role === "ketua") {
+        navigate("/ketua/dashboard");
+      }
+    } else {
+      navigate("/auth/login");
+    }
+  }, []);
   return (
     <div className="flex font-Poppins text-black">
       {/* sidebar */}

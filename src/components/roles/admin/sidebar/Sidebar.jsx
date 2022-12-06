@@ -1,21 +1,26 @@
 /** @format */
 
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useLogin from "../../../../store/login";
 import { ListMenu } from "./ListMenu";
 import logo from "../../../../assets/gambar/uogp.png";
+import Spinner from "../../../loading/Spinner";
 
 const Sidebar = () => {
   // navigate
   const navigate = useNavigate();
+  // state
+  const [isLoading, setIsLoading] = useState(false);
   // logout store
   const { setLogout } = useLogin();
   const handleLogout = async () => {
+    setIsLoading(true);
     const logout = await setLogout();
     if (logout.status === "berhasil") {
-      navigate("/user/dashboard");
+      navigate("/auth/login");
     }
+    setIsLoading(false);
   };
   return (
     <div className="w-56 bg-bg-1 bg-cover bg-center">
@@ -29,14 +34,21 @@ const Sidebar = () => {
         </div>
 
         <div className="sticky inset-x-0 bottom-0 border-t border-gray-100 cursor-pointer">
-          <div
-            onClick={handleLogout}
-            className="flex shrink-0 items-center p-4 "
-          >
-            <div className="ml-1.5">
-              <p className="text-lg text-biru italic">Logout</p>
+          {isLoading && (
+            <div className="flex justify-center mb-4">
+              <Spinner />
             </div>
-          </div>
+          )}
+          {!isLoading && (
+            <div
+              onClick={handleLogout}
+              className="flex shrink-0 items-center p-4 "
+            >
+              <div className="ml-1.5">
+                <p className="text-lg text-biru italic">Logout</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

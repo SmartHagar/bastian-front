@@ -10,18 +10,16 @@ const CekLogin = () => {
     const user_login = JSON.parse(localStorage.getItem("user_login"));
     if (user_login) {
       const { role } = user_login;
-      if (role === "admin") {
+      if (role === "bendahara") {
         navigate("/admin/dashboard");
-      } else if (role === "ketua") {
+      } else if (role === "pimpinan") {
         navigate("/ketua/dashboard");
-      } else {
-        navigate("/user/dashboard");
       }
     } else {
-      navigate("/user/dashboard");
+      navigate("/auth/login");
     }
   }, []);
-  return <div>CekLogin</div>;
+  return <div>Gagal Cek. Refresh halaman ini</div>;
 };
 
 export default CekLogin;

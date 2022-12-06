@@ -24,15 +24,10 @@ import CekLogin from "../pages/auth/CekLogin";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 
-// user pages
-import IndexUser from "../pages/users/IndexUser";
-import DashboardUser from "../pages/users/dashboard/Dashboard";
-import AlumniUser from "../pages/users/alumni/Alumni";
-import AboutUser from "../pages/users/about/About";
-
 // ketua pages
 import IndexKetua from "../pages/ketua/IndexKetua";
 import DashboardKetua from "../pages/ketua/dashboard/Dashboard";
+import BukuKasKetua from "../pages/ketua/laporan/BukuKas";
 
 // error
 import NotFound from "../pages/errors/NotFound";
@@ -45,13 +40,7 @@ const MyRoutes = () => {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={pathname}>
-        <Route path="/" element={<Navigate replace to="/admin/dashboard" />} />
-        {/* user pages */}
-        <Route path="user" element={<IndexUser />}>
-          <Route path="dashboard" element={<DashboardUser />} />
-          <Route path="about" element={<AboutUser />} />
-          <Route path="alumni/:id" element={<AlumniUser />} />
-        </Route>
+        <Route path="/" element={<Navigate replace to="/auth/login" />} />
         {/* auth pages */}
         <Route path="auth">
           <Route path="login" element={<Login />} />
@@ -73,7 +62,9 @@ const MyRoutes = () => {
         {/* ketua pages */}
         <Route path="ketua" element={<IndexKetua />}>
           <Route path="dashboard" element={<DashboardKetua />} />
-          <Route path="laporan"></Route>
+          <Route path="laporan">
+            <Route path="buku-kas" element={<BukuKasKetua />} />
+          </Route>
         </Route>
 
         {/* not found */}
