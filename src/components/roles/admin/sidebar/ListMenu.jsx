@@ -47,7 +47,7 @@ export const ListMenu = () => {
           <span className="ml-3 text-sm"> Unit </span>
         </NavLink>
         <NavLink
-          to="/admin/alumni"
+          to="/admin/about"
           className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
         >
           <BiUserCheck size={20} />

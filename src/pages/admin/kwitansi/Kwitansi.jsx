@@ -24,8 +24,8 @@ const Kwitansi = () => {
           className="w-full px-2 py-2 bg-white rounded text-sm border shadow outline-none focus:outline-none focus:ring"
         >
           <option value="">Pilih Kwitansi</option>
-          <option value="Pemasukan">Pemasukan</option>
-          <option value="Pengeluaran">Pengeluaran</option>
+          <option value="Pemasukan">Kwitansi Pemasukan</option>
+          <option value="Pengeluaran">Kwitansi Pengeluaran</option>
         </select>
       </div>
       <div className="mt-4">{showKwitansi()}</div>

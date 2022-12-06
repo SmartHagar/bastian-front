@@ -7,6 +7,7 @@ const BASE_URL = "http://127.0.0.1:8000";
 const url_auth = `${BASE_URL}/auth`;
 const url_api = `${BASE_URL}/api`;
 const url_crud = `${BASE_URL}/crud`;
+const url_export = `${BASE_URL}/export`;
 
 export default function useUrl() {
   const auth = axios.create({
@@ -18,6 +19,9 @@ export default function useUrl() {
   const api = axios.create({
     baseURL: url_api,
   });
+  const exports = axios.create({
+    baseURL: url_export,
+  });
 
-  return { auth, crud, api, BASE_URL };
+  return { auth, crud, api, BASE_URL, exports };
 }

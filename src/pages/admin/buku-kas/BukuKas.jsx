@@ -33,7 +33,7 @@ const BukuKas = () => {
   const handleCetak = () => {
     window
       .open(
-        `${BASE_URL}/excel/transaksi?bulan=${bulan}&tahun=${tahun}`,
+        `${BASE_URL}/export/excel/transaksi?bulan=${bulan}&tahun=${tahun}`,
         "_blank"
       )
       .focus();
@@ -92,7 +92,7 @@ const BukuKas = () => {
         {btnCetak()}
       </div>
       {/* show table */}
-      <div>{showTable()}</div>
+      <div className="mb-5">{showTable()}</div>
     </div>
   );
 };
