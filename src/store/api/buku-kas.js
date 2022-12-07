@@ -35,6 +35,31 @@ const useBukuKas = create(
         };
       }
     },
+    setApiBukuKas: async ({ bulan, tahun }) => {
+      //   const getToken = JSON.parse(localStorage.getItem("token"));
+      try {
+        const res = await api({
+          method: "get",
+          url: `/buku-kas`,
+          params: {
+            bulan,
+            tahun,
+          },
+          //   headers: { Authorization: `Bearer ${getToken}` },
+        });
+        set((state) => ({ ...state, responses: res }));
+        set((state) => ({ ...state, dtBukuKas: res.data }));
+        return {
+          status: "berhasil",
+          data: res.data,
+        };
+      } catch (error) {
+        return {
+          status: "error",
+          error: error.response.data,
+        };
+      }
+    },
   }))
 );
 
