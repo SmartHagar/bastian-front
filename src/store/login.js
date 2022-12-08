@@ -38,18 +38,30 @@ const useLogin = create(
     },
     setLogout: async () => {
       try {
+        localStorage.removeItem("user_login");
+        return {
+          status: "berhasil",
+        };
+      } catch (error) {
+        console.log(error);
+        return {
+          status: "error",
+          error: error.response.data,
+        };
+      }
+    },
+    setGantiPassword: async (item) => {
+      try {
         const res = await auth({
           method: "post",
-          url: `/logout`,
-          headers: { Authorization: `Bearer ${getToken}` },
+          url: `/ganti-password`,
+          data: item,
         });
-        localStorage.removeItem("user_login");
         return {
           status: "berhasil",
           data: res.data,
         };
       } catch (error) {
-        console.log(error);
         return {
           status: "error",
           error: error.response.data,

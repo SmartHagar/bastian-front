@@ -2,12 +2,20 @@
 
 import React, { useEffect, useState } from "react";
 import BukuKasPerBulan from "../../../components/grafik/BukuKasPerBulan";
-import useBukuKas from "../../../store/api/buku-kas";
+import BukuKasPerTahun from "../../../components/grafik/BukuKasPerTahun";
 
 const Dashboard = () => {
   return (
     <div>
-      <BukuKasPerBulan />
+      <div className="min-h-[91vh]">
+        <BukuKasPerBulan />
+      </div>
+      <div className="min-h-[91vh]">
+        <BukuKasPerTahun />
+      </div>
+      <div className="min-h-[91vh]">
+        <BukuKasPerTahun />
+      </div>
     </div>
   );
 };

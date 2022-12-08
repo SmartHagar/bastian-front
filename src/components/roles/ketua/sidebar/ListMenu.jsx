@@ -39,12 +39,12 @@ export const ListMenu = () => {
           <span className="ml-3 text-sm"> Home </span>
         </NavLink>
         <NavLink
-          to="/ketua/about"
+          to="/ketua/akun"
           className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
         >
           <BiUserCheck size={20} />
 
-          <span className="ml-3 text-sm"> About </span>
+          <span className="ml-3 text-sm"> Akun </span>
         </NavLink>
       </nav>
       <div className="h-10 w-40 rounded-lg bg-biru mx-auto flex justify-center items-center text-white my-4">

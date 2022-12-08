@@ -10,18 +10,22 @@ const BukuKasPerBulan = () => {
   const [options, setOptions] = useState("");
   const [series, setSeries] = useState("");
   const [dataSeries, setDataSeries] = useState([]);
+  const [dataChart, setDataChart] = useState([]);
 
   // store
-  const { setApiBukuKas, dtBukuKas } = useBukuKas();
+  const { setApiBukuKas } = useBukuKas();
   // state
   const [bulan, setBulan] = useState("");
   const [tahun, setTahun] = useState("");
   // effect
   useEffect(() => {
-    if (bulan && tahun) {
-      setApiBukuKas({ bulan, tahun });
-    }
-
+    const fetch = async () => {
+      if (bulan && tahun) {
+        const { data } = await setApiBukuKas({ bulan, tahun });
+        setDataChart(data);
+      }
+    };
+    fetch();
     return () => {};
   }, [bulan, tahun]);
 
@@ -71,7 +75,7 @@ const BukuKasPerBulan = () => {
   }
 
   const showGrafik = async () => {
-    const dataGroup = groupBy(dtBukuKas);
+    const dataGroup = groupBy(dataChart);
     // return;
     const categories = [];
     const pemasukan = [];
@@ -106,7 +110,7 @@ const BukuKasPerBulan = () => {
       plotOptions: {
         bar: {
           horizontal: false,
-          columnWidth: "60%",
+          columnWidth: "50%",
           endingShape: "rounded",
         },
       },
@@ -151,8 +155,39 @@ const BukuKasPerBulan = () => {
 
   // effect
   useEffect(() => {
-    dtBukuKas && showGrafik();
-  }, [dtBukuKas]);
+    dataChart && showGrafik();
+  }, [dataChart]);
+
+  // show kosong
+  const showEmpty = () => {
+    if (!tahun || !bulan) {
+      return (
+        <h1 className="text-center text-lg mt-10 text-merah">
+          Silahkan pilih tahun dan bulan untuk melihat grafik
+        </h1>
+      );
+    }
+    if (tahun && bulan) {
+      return (
+        <>
+          {dataSeries.length < 1 && (
+            <h1 className="text-center text-lg mt-10 text-merah">
+              Data yang dipilih kosong
+            </h1>
+          )}
+          {dataSeries.length > 0 && (
+            <Chart
+              options={options}
+              series={series}
+              type="bar"
+              width="100%"
+              height="500"
+            />
+          )}
+        </>
+      );
+    }
+  };
 
   return (
     <div>
@@ -193,17 +228,7 @@ const BukuKasPerBulan = () => {
           <option value="12">Desember</option>
         </select>
       </div>
-      <div>
-        {dataSeries.length > 0 && (
-          <Chart
-            options={options}
-            series={series}
-            type="bar"
-            width="100%"
-            height="500"
-          />
-        )}
-      </div>
+      <div>{showEmpty()}</div>
     </div>
   );
 };

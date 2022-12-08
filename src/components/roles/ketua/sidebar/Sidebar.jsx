@@ -6,6 +6,7 @@ import useLogin from "../../../../store/login";
 import { ListMenu } from "./ListMenu";
 import logo from "../../../../assets/gambar/uogp.png";
 import Spinner from "../../../loading/Spinner";
+import toastError from "../../../../services/toast-error";
 
 const Sidebar = () => {
   // navigate
@@ -19,6 +20,8 @@ const Sidebar = () => {
     const logout = await setLogout();
     if (logout.status === "berhasil") {
       navigate("/auth/login");
+    } else {
+      toastError("Gagal Logout");
     }
     setIsLoading(false);
   };

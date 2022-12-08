@@ -17,7 +17,7 @@ import TransaksiAdmin from "../pages/admin/transaksi/Transaksi";
 import GambarAdmin from "../pages/admin/gambar/Gambar";
 import KwitansiAdmin from "../pages/admin/kwitansi/Kwitansi";
 import BukuKasAdmin from "../pages/admin/buku-kas/BukuKas";
-import AboutAdmin from "../pages/admin/about/About";
+import AkunAdmin from "../pages/admin/akun/Akun";
 
 // auth pages
 import CekLogin from "../pages/auth/CekLogin";
@@ -28,6 +28,7 @@ import Register from "../pages/auth/Register";
 import IndexKetua from "../pages/ketua/IndexKetua";
 import DashboardKetua from "../pages/ketua/dashboard/Dashboard";
 import BukuKasKetua from "../pages/ketua/laporan/BukuKas";
+import AkunKetua from "../pages/ketua/akun/Akun";
 
 // error
 import NotFound from "../pages/errors/NotFound";
@@ -57,11 +58,12 @@ const MyRoutes = () => {
           </Route>
           <Route path="kwitansi" element={<KwitansiAdmin />} />
           <Route path="buku-kas" element={<BukuKasAdmin />} />
-          <Route path="about" element={<AboutAdmin />} />
+          <Route path="akun" element={<AkunAdmin />} />
         </Route>
         {/* ketua pages */}
         <Route path="ketua" element={<IndexKetua />}>
           <Route path="dashboard" element={<DashboardKetua />} />
+          <Route path="akun" element={<AkunKetua />} />
           <Route path="laporan">
             <Route path="buku-kas" element={<BukuKasKetua />} />
           </Route>
