@@ -13,9 +13,6 @@ const Dashboard = () => {
       <div className="min-h-[91vh]">
         <BukuKasPerTahun />
       </div>
-      <div className="min-h-[91vh]">
-        <BukuKasPerTahun />
-      </div>
     </div>
   );
 };

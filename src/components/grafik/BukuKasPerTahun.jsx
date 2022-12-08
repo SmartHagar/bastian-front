@@ -15,7 +15,7 @@ const BukuKasPerTahun = () => {
   // store
   const { setApiBukuKas } = useBukuKas();
   // state
-  const [tahun, setTahun] = useState("2022");
+  const [tahun, setTahun] = useState("");
   // effect
   useEffect(() => {
     const fetch = async () => {
@@ -31,7 +31,7 @@ const BukuKasPerTahun = () => {
   function groupBy(items) {
     const sumByTgl = Object.values(
       items.reduce((obj, item) => {
-        const key = item.jenis + item.tgl_transaksi.split("-");
+        const key = item.jenis + item.tgl_transaksi.split("-")[1];
         if (!obj[key]) {
           obj[key] = Object.assign(item);
         } else {
@@ -40,9 +40,8 @@ const BukuKasPerTahun = () => {
         return obj;
       }, {})
     );
-    console.log(sumByTgl);
     const groups = sumByTgl.reduce((groups, row) => {
-      const date = row.tgl_transaksi;
+      const date = row.tgl_transaksi.split("-")[1];
       if (!groups[date]) {
         groups[date] = [];
       }
@@ -76,13 +75,13 @@ const BukuKasPerTahun = () => {
 
   const showGrafik = async () => {
     const dataGroup = groupBy(dataChart);
-    return;
+    // return;
     const categories = [];
     const pemasukan = [];
     const pengeluaran = [];
 
     dataGroup.forEach((el) => {
-      categories.push(moment(el.tgl_transaksi).format("DD"));
+      categories.push(moment(el.tgl_transaksi).format("MM"));
       el.data.forEach((row) => {
         const { jenis, jumlah } = row;
         if (jenis === "Pemasukan") {
