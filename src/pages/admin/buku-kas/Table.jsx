@@ -32,8 +32,10 @@ const Table = ({ dataKas }) => {
   };
 
   const showData = () => {
+    console.log(sisaSaldo);
     if (dataKas) {
       const { data } = dataKas;
+      let saldo = sisaSaldo;
 
       return (
         data &&
@@ -41,7 +43,6 @@ const Table = ({ dataKas }) => {
           const { item, ket, tgl_transaksi, jenis, jumlah } = row;
           let pemasukan = "";
           let pengeluaran = "";
-          let saldo = sisaSaldo;
 
           if (jenis === "Pemasukan") {
             pemasukan = jumlah;
