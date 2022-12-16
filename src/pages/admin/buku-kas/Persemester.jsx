@@ -6,7 +6,7 @@ import Table from "./Table";
 
 import useUrl from "../../../services/base_url";
 
-const BukuKas = () => {
+const Persemester = () => {
   const { BASE_URL } = useUrl();
   // store
   const { setBukuKas, dtBukuKas } = useBukuKas();
@@ -97,4 +97,4 @@ const BukuKas = () => {
   );
 };
 
-export default BukuKas;
+export default Persemester;

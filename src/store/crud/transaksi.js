@@ -28,11 +28,16 @@ const useTransaksi = create(
             provinsi_id: cari.provinsi_id,
           },
         });
-        set((state) => ({ ...state, responses: response.data }));
-        set((state) => ({ ...state, dtTransaksi: response.data }));
+        const { data } = response;
+        // filter data tanpa kantin
+        const filterNotKantin = data.filter(function (row) {
+          return !row.item.nama.toLowerCase().includes("kantin");
+        });
+        set((state) => ({ ...state, responses: filterNotKantin }));
+        set((state) => ({ ...state, dtTransaksi: filterNotKantin }));
         return {
           status: "berhasil",
-          data: response.data,
+          data: filterNotKantin,
         };
       } catch (error) {
         return {

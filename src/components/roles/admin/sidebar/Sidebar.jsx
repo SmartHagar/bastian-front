@@ -26,7 +26,7 @@ const Sidebar = () => {
     setIsLoading(false);
   };
   return (
-    <div className="w-56 bg-bg-1 bg-cover bg-center">
+    <div className="w-64 bg-bg-1 bg-cover bg-center">
       <div className="flex h-screen flex-col justify-between border-r shadow-lg backdrop-blur-2xl bg-white/80">
         <div className="px-4 py-2 overflow-auto">
           <div className="mb-8">

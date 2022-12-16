@@ -16,7 +16,9 @@ import IndexAdmin from "../pages/admin/IndexAdmin";
 import TransaksiAdmin from "../pages/admin/transaksi/Transaksi";
 import GambarAdmin from "../pages/admin/gambar/Gambar";
 import KwitansiAdmin from "../pages/admin/kwitansi/Kwitansi";
-import BukuKasAdmin from "../pages/admin/buku-kas/BukuKas";
+import BukuKasPerbulanAdmin from "../pages/admin/buku-kas/Perbulan";
+import BukuKasPersemesterAdmin from "../pages/admin/buku-kas/Persemester";
+import BukuKasPertahunAdmin from "../pages/admin/buku-kas/Pertahun";
 import AkunAdmin from "../pages/admin/akun/Akun";
 
 // auth pages
@@ -57,7 +59,11 @@ const MyRoutes = () => {
             <Route path=":jenis/:transaksi_id" element={<GambarAdmin />} />
           </Route>
           <Route path="kwitansi" element={<KwitansiAdmin />} />
-          <Route path="buku-kas" element={<BukuKasAdmin />} />
+          <Route path="buku-kas">
+            <Route path="perbulan" element={<BukuKasPerbulanAdmin />} />
+            <Route path="persemester" element={<BukuKasPersemesterAdmin />} />
+            <Route path="pertahun" element={<BukuKasPertahunAdmin />} />
+          </Route>
           <Route path="akun" element={<AkunAdmin />} />
         </Route>
         {/* ketua pages */}

@@ -5,13 +5,26 @@ import useItem from "../../store/crud/item";
 
 import SelectSearch from "./SelectSearch";
 
-const SelectItem = ({ pilihItem, setPilihItem, disable = false }) => {
+const SelectItem = ({
+  pilihItem,
+  setPilihItem,
+  disable = false,
+  kantin = false,
+}) => {
   const { setItem, dtItem } = useItem();
   useEffect(() => {
     setItem();
   }, []);
+  // filter data tanpa kantin
+  let data = dtItem;
+  if (!kantin) {
+    // data = data.filter((row) => row.nama.toLowerCase() !== "kantin");
+    data = data.filter(function (row) {
+      return !row.nama.toLowerCase().includes("kantin");
+    });
+  }
   // pilihan Item
-  const optionsItem = dtItem.map(function (Item) {
+  const optionsItem = data.map(function (Item) {
     return {
       value: Item.id,
       label: `${Item.nama}`,

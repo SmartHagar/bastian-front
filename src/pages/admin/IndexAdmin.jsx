@@ -25,7 +25,7 @@ const IndexAdmin = () => {
       <div className="h-screen fixed shadow-lg z-0">
         <Sidebar />
       </div>
-      <div className="flex flex-wrap absolute left-56 right-0">
+      <div className="flex flex-wrap absolute left-64 right-0">
         {/* navbar */}
         <div className="w-full z-40 relative top-0">
           <Navbar />
