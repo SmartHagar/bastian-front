@@ -15,33 +15,41 @@ const Form = ({
   const { addData, updateData } = useItem();
   // state
   const [nama, setNama] = useState("");
+  const [kode, setKode] = useState("");
+  // reset state
+  const reset = () => {
+    setKode("");
+    setNama("");
+  };
   // effect
   useEffect(() => {
     if (cekEdit) {
-      return dataEdit.nama && setNama(dataEdit.nama);
+      return (
+        dataEdit.nama && setNama(dataEdit.nama),
+        dataEdit.kode && setKode(dataEdit.kode)
+      );
     }
-    setNama("");
+    reset();
   }, [cekEdit, dataEdit]);
 
   // ketika tombol simpan ditekan
   const handleSimpan = async (e) => {
     const items = {
       nama,
+      kode,
     };
     e.preventDefault();
     let cek;
     if (cekEdit) {
       cek = await updateData(dataEdit.id, items);
       setShowModal(false);
-      console.log(cek);
       setPesan(cek.data);
     } else {
       cek = await addData(items);
-      console.log(cek);
       setPesan(cek.data);
     }
     if (cek.status === "berhasil") {
-      setNama("");
+      reset();
     }
   };
   return (
@@ -75,6 +83,17 @@ const Form = ({
                         value={nama}
                         onChange={(e) => setNama(e.target.value)}
                         id="nama"
+                        type="text"
+                        className="px-3 py-2 text-slate-600 relative bg-white rounded text-sm border shadow outline-none focus:outline-none focus:ring w-full"
+                        required
+                      />
+                    </div>
+                    <div className="mb-3 pt-0 flex flex-col gap-2">
+                      <label htmlFor="kode">Kode Unit</label>
+                      <input
+                        value={kode}
+                        onChange={(e) => setKode(e.target.value)}
+                        id="kode"
                         type="text"
                         className="px-3 py-2 text-slate-600 relative bg-white rounded text-sm border shadow outline-none focus:outline-none focus:ring w-full"
                         required

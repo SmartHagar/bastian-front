@@ -46,9 +46,9 @@ const useKwitansi = create(
           data: res.data,
         };
       } catch (error) {
-        console.log(error);
         return {
           status: "error",
+          data: error.response.data,
         };
       }
     },
@@ -70,7 +70,7 @@ const useKwitansi = create(
       } catch (error) {
         return {
           status: "error",
-          error: error.response.data,
+          data: error.response.data,
         };
       }
     },

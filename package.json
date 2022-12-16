@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@develoka/angka-terbilang-js": "^1.4.2",
     "add": "^2.0.6",
     "apexcharts": "^3.36.3",
     "axios": "^1.2.0",

@@ -5,6 +5,8 @@ import React, { useState } from "react";
 import DatePickComp from "../../../components/date/DatePickComp";
 import SelectItem from "../../../components/select/SelectItem";
 import useKwitansiPDF from "../../../store/laporan/pdf/kwitansi";
+import angkaTerbilang from "@develoka/angka-terbilang-js";
+import Rupiah from "../../../components/mask/Rupiah";
 
 const FormPemasukan = () => {
   // store
@@ -15,6 +17,7 @@ const FormPemasukan = () => {
   const [penerima, setPenerima] = useState("");
   const [uang_terbilang, setUang_terbilang] = useState("");
   const [tanggal, setTanggal] = useState("");
+  const [jumlah, setJumlah] = useState("");
 
   const handleCetak = () => {
     const tgl_transaksi = moment(tanggal).format("DD/MM/yyyy");
@@ -23,6 +26,7 @@ const FormPemasukan = () => {
       unit: pilihItem && pilihItem.label,
       penerima,
       uang_terbilang,
+      jumlah: jumlah.replace(/\D/g, ""),
       tanggal: tanggal && tgl_transaksi,
     };
     cetakKwitansiPemasukan(items);
@@ -66,13 +70,22 @@ const FormPemasukan = () => {
                     className="px-3 py-2 text-slate-600 bg-white rounded text-sm border shadow outline-none focus:outline-none focus:ring w-full"
                   />
                 </div>
+                {/* Uang sejumlah */}
+                <div className="col-span-12 md:col-span-6 mb-3 pt-0 flex flex-col gap-2">
+                  <label htmlFor="jumlah">Jumlah Uang</label>
+                  <Rupiah setJumlah={setJumlah} jumlah={jumlah} />
+                </div>
                 {/* Uang sejumlah (Terbilang)? */}
                 <div className="col-span-12 md:col-span-6 mb-3 pt-0 flex flex-col gap-2">
                   <label htmlFor="uang_terbilang">
                     Uang sejumlah (Terbilang)?
                   </label>
                   <input
-                    value={uang_terbilang}
+                    value={
+                      jumlah
+                        ? angkaTerbilang(jumlah.replace(/\D/g, "")) + " rupiah"
+                        : ""
+                    }
                     onChange={(e) => setUang_terbilang(e.target.value)}
                     id="uang_terbilang"
                     type="text"

@@ -30,8 +30,8 @@ const Unit = () => {
     fetch();
   }, [setItem, search, page]);
   // table
-  const headers = ["No", "Nama Unit", "Aksi"];
-  const tableBodies = [`nama`];
+  const headers = ["No", "Nama Unit", "Kode", "Aksi"];
+  const tableBodies = [`nama`, "kode"];
 
   const handleEdit = (item) => {
     setCekEdit(true);

@@ -59,7 +59,7 @@ const useTransaksi = create(
       } catch (error) {
         return {
           status: "error",
-          error: error.response.data,
+          data: error.response.data,
         };
       }
     },
@@ -80,7 +80,7 @@ const useTransaksi = create(
       } catch (error) {
         return {
           status: "error",
-          error: error.response.data,
+          data: error.response.data,
         };
       }
     },
@@ -111,7 +111,7 @@ const useTransaksi = create(
       } catch (error) {
         return {
           status: "error",
-          error: error.response.data,
+          data: error.response.data,
         };
       }
     },

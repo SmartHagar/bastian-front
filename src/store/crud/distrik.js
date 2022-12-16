@@ -12,7 +12,11 @@ const useDistrik = create(
   devtools((set, get) => ({
     dtDistrik: [],
     responses: [],
-    setDistrik: async (cari = { search: "", kabupaten_id: "" }, page = "", limit = "") => {
+    setDistrik: async (
+      cari = { search: "", kabupaten_id: "" },
+      page = "",
+      limit = ""
+    ) => {
       try {
         const response = await crud({
           method: "get",
@@ -55,7 +59,8 @@ const useDistrik = create(
         };
       } catch (error) {
         return {
-          status: `Error ${error}`,
+          status: "error",
+          data: error.response.data,
         };
       }
     },
@@ -76,7 +81,7 @@ const useDistrik = create(
       } catch (error) {
         return {
           status: "error",
-          error: error.response.data,
+          data: error.response.data,
         };
       }
     },
@@ -107,7 +112,7 @@ const useDistrik = create(
       } catch (error) {
         return {
           status: "error",
-          error: error.response.data,
+          data: error.response.data,
         };
       }
     },

@@ -31,8 +31,14 @@ const Transaksi = () => {
     fetch();
   }, [setTransaksi, search, jenis]);
   // table
-  const headers = ["No", "Unit", "Uraian", "Tanggal", "Jumlah", "Aksi"];
-  const tableBodies = [`item.nama`, "ket", "tgl_transaksi", "jumlah"];
+  const headers = ["No", "Kode", "Unit", "Uraian", "Tanggal", "Jumlah", "Aksi"];
+  const tableBodies = [
+    "kode_no_urut",
+    `item.nama`,
+    "ket",
+    "tgl_transaksi",
+    "jumlah",
+  ];
   // navigate
   const navigate = useNavigate();
 

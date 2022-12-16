@@ -41,7 +41,7 @@ const Dashboard = () => {
                       dtSaldo.pemasukan_terakhir.item.nama}
                   </p>
                   <p className="text-merah font-Charmonman">
-                    {dtSaldo.pengeluaran_terakhir &&
+                    {dtSaldo.pemasukan_terakhir &&
                       showRupiah(dtSaldo.pemasukan_terakhir.jumlah)}
                   </p>
                 </div>

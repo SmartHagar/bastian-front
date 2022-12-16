@@ -55,7 +55,8 @@ const useItem = create(
         };
       } catch (error) {
         return {
-          status: `Error ${error}`,
+          status: "error",
+          data: error.response.data,
         };
       }
     },
@@ -76,7 +77,7 @@ const useItem = create(
       } catch (error) {
         return {
           status: "error",
-          error: error.response.data,
+          data: error.response.data,
         };
       }
     },
@@ -107,7 +108,7 @@ const useItem = create(
       } catch (error) {
         return {
           status: "error",
-          error: error.response.data,
+          data: error.response.data,
         };
       }
     },

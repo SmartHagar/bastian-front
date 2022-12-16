@@ -5,7 +5,7 @@ import useItem from "../../store/crud/item";
 
 import SelectSearch from "./SelectSearch";
 
-const SelectItem = ({ pilihItem, setPilihItem }) => {
+const SelectItem = ({ pilihItem, setPilihItem, disable = false }) => {
   const { setItem, dtItem } = useItem();
   useEffect(() => {
     setItem();
@@ -15,6 +15,7 @@ const SelectItem = ({ pilihItem, setPilihItem }) => {
     return {
       value: Item.id,
       label: `${Item.nama}`,
+      data: `${Item.kode}`,
     };
   });
   const onSearchSelect = (search) => {
@@ -28,7 +29,7 @@ const SelectItem = ({ pilihItem, setPilihItem }) => {
         options={optionsItem}
         id="Item_id"
         onInputChange={onSearchSelect}
-        required
+        isDisabled={disable}
       />
     </>
   );

@@ -9,7 +9,10 @@ const getProperty = (obj, prop) => {
     var l = parts.length,
       i = 1,
       current = parts[0];
-
+    // jika gabungan antara kode dan no urut
+    if (last.includes("kode_no_urut")) {
+      return `${obj["kode"]}-${obj["no_urut"]}`;
+    }
     while ((obj = obj[current]) && i < l) {
       current = parts[i];
       i++;
@@ -18,6 +21,7 @@ const getProperty = (obj, prop) => {
     if (typeof obj === "object") {
       return obj ? obj[last] : "";
     }
+
     if (prop === "jumlah") {
       return showRupiah(obj);
     }

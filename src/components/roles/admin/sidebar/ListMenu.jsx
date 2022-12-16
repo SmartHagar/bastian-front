@@ -5,7 +5,6 @@ import { NavLink, useLocation } from "react-router-dom";
 import {
   BiHome,
   BiUserCheck,
-  BiAbacus,
   BiCabinet,
   BiExport,
   BiImport,
