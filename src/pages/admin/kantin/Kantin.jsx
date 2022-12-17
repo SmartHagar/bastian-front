@@ -25,20 +25,14 @@ const Kantin = () => {
   // useEffect
   useEffect(() => {
     const fetch = async () => {
-      await setTransaksi({ search }, jenis);
+      await setTransaksi({ search, kantin: true }, jenis);
       setIsLoading(false);
     };
     fetch();
   }, [setTransaksi, search, jenis]);
   // table
-  const headers = ["No", "Kode", "Unit", "Uraian", "Tanggal", "Jumlah", "Aksi"];
-  const tableBodies = [
-    "kode_no_urut",
-    `item.nama`,
-    "ket",
-    "tgl_transaksi",
-    "jumlah",
-  ];
+  const headers = ["No", "Kode", "Uraian", "Tanggal", "Jumlah", "Aksi"];
+  const tableBodies = ["kode_no_urut", "ket", "tgl_transaksi", "jumlah"];
   // navigate
   const navigate = useNavigate();
 
@@ -49,8 +43,7 @@ const Kantin = () => {
   };
 
   const setLihat = (row) => {
-    console.log("lihat", row);
-    navigate(`/admin/transaksi/${jenis}/${row.id}`);
+    navigate(`/admin/kantin/${jenis}/${row.id}`);
   };
 
   const handleDelete = async (id) => {
@@ -89,7 +82,7 @@ const Kantin = () => {
       />
       {/* header */}
       <div className="flex justify-between mb-2">
-        <p>Silahkan menambah, merubah dan menghapus data {jenis}</p>
+        <p>Silahkan menambah, merubah dan menghapus data {jenis} kantin</p>
         <button
           className="bg-biru text-white active:bg-biru font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button"

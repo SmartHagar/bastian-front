@@ -14,6 +14,7 @@ import DashboardAdmin from "../pages/admin/dashboard/Dashboard";
 import UnitAdmin from "../pages/admin/unit/Unit";
 import IndexAdmin from "../pages/admin/IndexAdmin";
 import TransaksiAdmin from "../pages/admin/transaksi/Transaksi";
+import TransaksiKantinAdmin from "../pages/admin/kantin/Kantin";
 import GambarAdmin from "../pages/admin/gambar/Gambar";
 import KwitansiAdmin from "../pages/admin/kwitansi/Kwitansi";
 import BukuKasPerbulanAdmin from "../pages/admin/buku-kas/Perbulan";
@@ -56,6 +57,10 @@ const MyRoutes = () => {
           <Route path="unit" element={<UnitAdmin />} />
           <Route path="transaksi">
             <Route path=":jenis" element={<TransaksiAdmin />} />
+            <Route path=":jenis/:transaksi_id" element={<GambarAdmin />} />
+          </Route>
+          <Route path="kantin">
+            <Route path=":jenis" element={<TransaksiKantinAdmin />} />
             <Route path=":jenis/:transaksi_id" element={<GambarAdmin />} />
           </Route>
           <Route path="kwitansi" element={<KwitansiAdmin />} />

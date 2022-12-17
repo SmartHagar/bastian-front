@@ -14,7 +14,7 @@ const useTransaksi = create(
     dtTransaksi: [],
     responses: [],
     setTransaksi: async (
-      cari = { search: "", provinsi_id: "" },
+      cari = { search: "", provinsi_id: "", kantin: false },
       jenis = ""
     ) => {
       try {
@@ -29,15 +29,23 @@ const useTransaksi = create(
           },
         });
         const { data } = response;
+        let filterKantin;
         // filter data tanpa kantin
-        const filterNotKantin = data.filter(function (row) {
-          return !row.item.nama.toLowerCase().includes("kantin");
-        });
-        set((state) => ({ ...state, responses: filterNotKantin }));
-        set((state) => ({ ...state, dtTransaksi: filterNotKantin }));
+        if (!cari.kantin) {
+          filterKantin = data.filter(function (row) {
+            return !row.item.nama.toLowerCase().includes("kantin");
+          });
+        }
+        if (cari.kantin) {
+          filterKantin = data.filter(function (row) {
+            return row.item.nama.toLowerCase().includes("kantin");
+          });
+        }
+        set((state) => ({ ...state, responses: filterKantin }));
+        set((state) => ({ ...state, dtTransaksi: filterKantin }));
         return {
           status: "berhasil",
-          data: filterNotKantin,
+          data: filterKantin,
         };
       } catch (error) {
         return {

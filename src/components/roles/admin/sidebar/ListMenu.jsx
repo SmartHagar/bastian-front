@@ -97,16 +97,16 @@ export const ListMenu = () => {
             </span>
           </summary>
 
-          <nav aria-label="buku-kas Nav" className="mt-1.5 ml-8 flex flex-col">
+          <nav aria-label="kantin Nav" className="mt-1.5 ml-8 flex flex-col">
             <NavLink
-              to="/admin/buku-kas/perbulan"
+              to="/admin/kantin/Pemasukan"
               className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
             >
               <span className="ml-3 text-sm"> Pemasukan </span>
             </NavLink>
 
             <NavLink
-              to="/admin/buku-kas/persemester"
+              to="/admin/kantin/Pengeluaran"
               className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
             >
               <span className="ml-3 text-sm"> Pengeluaran </span>

@@ -8,6 +8,7 @@ import moment from "moment";
 import Rupiah from "../../../components/mask/Rupiah";
 import kodefikasi from "../../../services/kodefikasi";
 import useTransaksiAPI from "../../../store/api/transaksi";
+import useItem from "../../../store/crud/item";
 
 const Form = ({
   showModal,
@@ -21,6 +22,7 @@ const Form = ({
   // store
   const { addData, updateData } = useTransaksi();
   const { setTransaksi, dtTransaksi } = useTransaksiAPI();
+  const { setItem } = useItem();
   // state
   const [ket, setKet] = useState("");
   const [pilihItem, setPilihItem] = useState("");
@@ -37,18 +39,13 @@ const Form = ({
     setDate(new Date());
     setNoUrut("");
   };
+
   // effect
   useEffect(() => {
     if (cekEdit) {
       return (
         dataEdit.ket && setKet(dataEdit.ket),
         dataEdit.jumlah && setJumlah(`Rp. ${dataEdit.jumlah}`),
-        dataEdit.item &&
-          setPilihItem({
-            value: dataEdit.item.id,
-            label: dataEdit.item.nama,
-            data: dataEdit.item.kode,
-          }),
         dataEdit.tgl_transaksi && setDate(new Date(dataEdit.tgl_transaksi)),
         dataEdit.kode && setKode(dataEdit.kode),
         dataEdit.no_urut && setNoUrut(dataEdit.no_urut)
@@ -58,14 +55,26 @@ const Form = ({
     reset();
   }, [cekEdit, dataEdit]);
 
+  // kode kantin
   const cekKode = async () => {
     // kode baru
     let kode = "";
-    if (pilihItem) {
-      kode = `${moment(date).format("DD/MM/YYYY")}-${pilihItem.data}`;
-      const kodefk = kodefikasi({ old_prefix: dtTransaksi, new_prefix: kode });
-      setKode(kode);
-      setNoUrut(kodefk);
+    const { data } = await setItem();
+    if (data.length > 0) {
+      const filter = data.filter((row) =>
+        row.nama.toLowerCase().includes("kantin")
+      );
+
+      if (filter.length > 0) {
+        setPilihItem(filter[0].id);
+        kode = `${moment(date).format("DD/MM/YYYY")}-${filter[0].kode}`;
+        const kodefk = kodefikasi({
+          old_prefix: dtTransaksi,
+          new_prefix: kode,
+        });
+        setKode(kode);
+        setNoUrut(kodefk);
+      }
     }
     // mengambil kode lama
     // membuat kodefikasi
@@ -77,13 +86,13 @@ const Form = ({
     }
 
     return () => {};
-  }, [pilihItem, date]);
+  }, [date, pilihItem]);
 
   // ketika tombol simpan ditekan
   const handleSimpan = async (e) => {
     const tgl_transaksi = moment(date).format("YYYY-MM-DD");
     const items = {
-      item_id: pilihItem.value,
+      item_id: pilihItem,
       tgl_transaksi,
       ket,
       jenis,
@@ -96,11 +105,9 @@ const Form = ({
     if (cekEdit) {
       cek = await updateData(dataEdit.id, items);
       setShowModal(false);
-      console.log(cek);
       setPesan(cek.data);
     } else {
       cek = await addData(items);
-      console.log(cek);
       setPesan(cek.data);
     }
     if (cek.status === "berhasil") {
@@ -133,15 +140,6 @@ const Form = ({
                 {/*body*/}
                 <form onSubmit={handleSimpan}>
                   <div className=" px-6 py-3 flex-auto">
-                    {/* Item */}
-                    <div className="col-span-12 md:col-span-6 mb-3 pt-0 flex flex-col gap-2">
-                      <label htmlFor="Item_id">Unit</label>
-                      <SelectItem
-                        setPilihItem={setPilihItem}
-                        pilihItem={pilihItem}
-                        disable={cekEdit ? true : false}
-                      />
-                    </div>
                     {/* Kode */}
                     <div className="col-span-12 md:col-span-6 mb-3 pt-0 flex flex-col gap-2">
                       <label htmlFor="kode">Kode Transaksi</label>

@@ -43,6 +43,7 @@ const SelectItem = ({
         id="Item_id"
         onInputChange={onSearchSelect}
         isDisabled={disable}
+        defaultValue={optionsItem[1]}
       />
     </>
   );
