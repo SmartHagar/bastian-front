@@ -20,7 +20,7 @@ export const ListMenu = () => {
   const path = location.pathname.split("/");
   // use effect
   useEffect(() => {
-    setPathName(path[2]);
+    setPathName(path);
   }, [location]);
 
   return (
@@ -77,7 +77,7 @@ export const ListMenu = () => {
         </NavLink>
 
         {/* kantin */}
-        <details className="group" open={pathName === "kantin" && true}>
+        <details className="group" open={pathName[2] === "kantin" && true}>
           <summary className="flex cursor-pointer items-center rounded-lg px-4 py-2 text-merah hover:text-kuning">
             <BiExport size={20} />
             <span className="ml-3 text-sm"> Kantin </span>
@@ -127,7 +127,7 @@ export const ListMenu = () => {
           <span className="ml-3 text-sm"> Kwitansi </span>
         </NavLink>
         {/* buku kas */}
-        <details className="group" open={pathName === "buku-kas" && true}>
+        <details className="group" open={pathName[3] === "buku-kas" && true}>
           <summary className="flex cursor-pointer items-center rounded-lg px-4 py-2 text-merah hover:text-kuning">
             <BiExport size={20} />
             <span className="ml-3 text-sm"> Buku Kas Umum</span>
@@ -149,21 +149,21 @@ export const ListMenu = () => {
 
           <nav aria-label="buku-kas Nav" className="mt-1.5 ml-8 flex flex-col">
             <NavLink
-              to="/admin/buku-kas/perbulan"
+              to="/admin/laporan/buku-kas/perbulan"
               className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
             >
               <span className="ml-3 text-sm"> Perbulan </span>
             </NavLink>
 
             <NavLink
-              to="/admin/buku-kas/persemester"
+              to="/admin/laporan/buku-kas/persemester"
               className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
             >
               <span className="ml-3 text-sm"> Persemester </span>
             </NavLink>
 
             <NavLink
-              to="/admin/buku-kas/pertahun"
+              to="/admin/laporan/buku-kas/pertahun"
               className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
             >
               <span className="ml-3 text-sm"> Pertahun </span>
@@ -171,10 +171,7 @@ export const ListMenu = () => {
           </nav>
         </details>
         {/* bukukas-kantin */}
-        <details
-          className="group"
-          open={pathName === "buku-kas-kantin" && true}
-        >
+        <details className="group" open={pathName[3] === "kantin" && true}>
           <summary className="flex cursor-pointer items-center rounded-lg px-4 py-2 text-merah hover:text-kuning">
             <BiExport size={20} />
             <span className="ml-3 text-sm"> Buku Kas Kantin </span>
@@ -194,23 +191,23 @@ export const ListMenu = () => {
             </span>
           </summary>
 
-          <nav aria-label="buku-kas Nav" className="mt-1.5 ml-8 flex flex-col">
+          <nav aria-label="kantin Nav" className="mt-1.5 ml-8 flex flex-col">
             <NavLink
-              to="/admin/buku-kas/perbulan"
+              to="/admin/laporan/kantin/perbulan"
               className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
             >
               <span className="ml-3 text-sm"> Perbulan </span>
             </NavLink>
 
             <NavLink
-              to="/admin/buku-kas/persemester"
+              to="/admin/laporan/kantin/persemester"
               className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
             >
               <span className="ml-3 text-sm"> Persemester </span>
             </NavLink>
 
             <NavLink
-              to="/admin/buku-kas/pertahun"
+              to="/admin/laporan/kantin/pertahun"
               className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
             >
               <span className="ml-3 text-sm"> Pertahun </span>

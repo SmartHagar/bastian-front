@@ -17,9 +17,13 @@ import TransaksiAdmin from "../pages/admin/transaksi/Transaksi";
 import TransaksiKantinAdmin from "../pages/admin/kantin/Kantin";
 import GambarAdmin from "../pages/admin/gambar/Gambar";
 import KwitansiAdmin from "../pages/admin/kwitansi/Kwitansi";
-import BukuKasPerbulanAdmin from "../pages/admin/buku-kas/Perbulan";
-import BukuKasPersemesterAdmin from "../pages/admin/buku-kas/Persemester";
-import BukuKasPertahunAdmin from "../pages/admin/buku-kas/Pertahun";
+import BukuKasPerbulanAdmin from "../pages/admin/laporan/buku-kas/Perbulan";
+import BukuKasPersemesterAdmin from "../pages/admin/laporan/buku-kas/Persemester";
+import BukuKasPertahunAdmin from "../pages/admin/laporan/buku-kas/Pertahun";
+// kantin
+import KantinPerbulanAdmin from "../pages/admin/laporan/kantin/Perbulan";
+import KantinPersemesterAdmin from "../pages/admin/laporan/kantin/Persemester";
+import KantinPertahunAdmin from "../pages/admin/laporan/kantin/Pertahun";
 import AkunAdmin from "../pages/admin/akun/Akun";
 
 // auth pages
@@ -64,10 +68,17 @@ const MyRoutes = () => {
             <Route path=":jenis/:transaksi_id" element={<GambarAdmin />} />
           </Route>
           <Route path="kwitansi" element={<KwitansiAdmin />} />
-          <Route path="buku-kas">
-            <Route path="perbulan" element={<BukuKasPerbulanAdmin />} />
-            <Route path="persemester" element={<BukuKasPersemesterAdmin />} />
-            <Route path="pertahun" element={<BukuKasPertahunAdmin />} />
+          <Route path="laporan">
+            <Route path="buku-kas">
+              <Route path="perbulan" element={<BukuKasPerbulanAdmin />} />
+              <Route path="persemester" element={<BukuKasPersemesterAdmin />} />
+              <Route path="pertahun" element={<BukuKasPertahunAdmin />} />
+            </Route>
+            <Route path="kantin">
+              <Route path="perbulan" element={<KantinPerbulanAdmin />} />
+              <Route path="persemester" element={<KantinPersemesterAdmin />} />
+              <Route path="pertahun" element={<KantinPertahunAdmin />} />
+            </Route>
           </Route>
           <Route path="akun" element={<AkunAdmin />} />
         </Route>

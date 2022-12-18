@@ -4,7 +4,7 @@
  */
 
 import React from "react";
-import showRupiah from "../../../services/rupiah";
+import showRupiah from "../../../../services/rupiah";
 
 const Table = ({ dataKas }) => {
   let sisaSaldo;
@@ -36,49 +36,71 @@ const Table = ({ dataKas }) => {
     if (dataKas) {
       const { data } = dataKas;
       let saldo = sisaSaldo;
-
+      let totalPemasukan = 0;
+      let totalPengeluaran = 0;
       return (
-        data &&
-        data.map((row, index) => {
-          const { item, ket, tgl_transaksi, jenis, jumlah } = row;
-          let pemasukan = "";
-          let pengeluaran = "";
+        <>
+          {data &&
+            data.map((row, index) => {
+              const { item, ket, tgl_transaksi, jenis, jumlah } = row;
+              let pemasukan = "";
+              let pengeluaran = "";
 
-          if (jenis === "Pemasukan") {
-            pemasukan = jumlah;
-            saldo += pemasukan;
-          }
-          if (jenis === "Pengeluaran") {
-            pengeluaran = jumlah;
-            saldo -= pengeluaran;
-          }
+              if (jenis === "Pemasukan") {
+                pemasukan = jumlah;
+                totalPemasukan += pemasukan;
+                saldo += pemasukan;
+              }
+              if (jenis === "Pengeluaran") {
+                pengeluaran = jumlah;
+                totalPengeluaran += pengeluaran;
+                saldo -= pengeluaran;
+              }
 
-          return (
-            <tr className="divide-x divide-gray-200" key={index}>
-              <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                {index + 1}
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                {item.nama}
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                {ket}
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                {tgl_transaksi}
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                {pemasukan && showRupiah(pemasukan)}
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                {pengeluaran && showRupiah(pengeluaran)}
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                {showRupiah(saldo)}
-              </td>
-            </tr>
-          );
-        })
+              return (
+                <tr className="divide-x divide-gray-200" key={index}>
+                  <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    {index + 1}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {item.nama}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {ket}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {tgl_transaksi}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {pemasukan && showRupiah(pemasukan)}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {pengeluaran && showRupiah(pengeluaran)}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {showRupiah(saldo)}
+                  </td>
+                </tr>
+              );
+            })}
+          <tr className="divide-x divide-gray-200">
+            <td
+              colSpan={4}
+              className="whitespace-nowrap px-4 py-2 font-medium text-gray-900"
+            >
+              Total
+            </td>
+            <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+              {showRupiah(totalPemasukan)}
+            </td>
+            <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+              {showRupiah(totalPengeluaran)}
+            </td>
+            <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+              {showRupiah(totalPemasukan - totalPengeluaran)}
+            </td>
+          </tr>
+        </>
       );
     }
   };

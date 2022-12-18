@@ -1,10 +1,10 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import useBukuKas from "../../../store/api/buku-kas";
+import useBukuKas from "../../../../store/api/buku-kas";
 import Table from "./Table";
 
-import useUrl from "../../../services/base_url";
+import useUrl from "../../../../services/base_url";
 
 const Perbulan = () => {
   const { BASE_URL } = useUrl();
@@ -16,7 +16,7 @@ const Perbulan = () => {
   // effect
   useEffect(() => {
     if (tahun && bulan) {
-      setBukuKas({ bulan, tahun });
+      setBukuKas({ bulan, tahun, kantin: true });
     }
   }, [bulan, tahun]);
 
