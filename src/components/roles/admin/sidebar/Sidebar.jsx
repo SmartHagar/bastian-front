@@ -7,8 +7,9 @@ import { ListMenu } from "./ListMenu";
 import logo from "../../../../assets/gambar/uogp.png";
 import Spinner from "../../../loading/Spinner";
 import toastError from "../../../../services/toast-error";
+import { BsTextIndentRight } from "react-icons/bs";
 
-const Sidebar = () => {
+const Sidebar = ({ hiddenMenu }) => {
   // navigate
   const navigate = useNavigate();
   // state
@@ -29,6 +30,12 @@ const Sidebar = () => {
     <div className="w-64 bg-bg-1 bg-cover bg-center">
       <div className="flex h-screen flex-col justify-between border-r shadow-lg backdrop-blur-2xl bg-white/80">
         <div className="px-4 py-2 overflow-auto">
+          <div
+            className="lg:hidden absolute cursor-pointer"
+            onClick={hiddenMenu}
+          >
+            <BsTextIndentRight size={30} className="text-biru" />
+          </div>
           <div className="mb-8">
             <img src={logo} alt="" className="h-14 m-auto mb-5" />
             <hr />
