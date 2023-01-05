@@ -1,38 +1,95 @@
 /** @format */
 
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePickComp from "../../../components/date/DatePickComp";
 import SelectItem from "../../../components/select/SelectItem";
-import useUrl from "../../../services/base_url";
-import useKwitansiPDF from "../../../store/laporan/pdf/kwitansi";
+import angkaTerbilang from "@develoka/angka-terbilang-js";
+import Rupiah from "../../../components/mask/Rupiah";
+import useBlankKwitansi from "../../../store/crud/blank-kwitansi";
+import toastShow from "../../../services/toast-show";
+import { Toaster } from "react-hot-toast";
+import kodefikasi from "../../../services/kodefikasi";
 
 const FormPengeluaran = () => {
   // store
-  const { BASE_URL } = useUrl();
-  const { cetakKwitansiPengeluaran } = useKwitansiPDF();
+  const { setBlankKwitansi, dtBlankKwitansi, addData } = useBlankKwitansi();
+
   // state
   const [kode, setKode] = useState("");
   const [pilihItem, setPilihItem] = useState("");
   const [penerima, setPenerima] = useState("");
   const [uang_terbilang, setUang_terbilang] = useState("");
   const [tanggal, setTanggal] = useState("");
+  const [jumlah, setJumlah] = useState("");
+  const [noUrut, setNoUrut] = useState("");
   const [keperluan, setKeperluan] = useState("");
 
-  const handleCetak = () => {
-    const tgl_transaksi = moment(tanggal).format("DD/MM/yyyy");
+  // kodefikasi
+  const cekKode = async () => {
+    // kode baru
+    let kode = "";
+    if (pilihItem) {
+      kode = `${moment(tanggal).format("DD/MM/YYYY")}-${pilihItem.data}-KK`;
+      const kodefk = kodefikasi({
+        old_prefix: dtBlankKwitansi,
+        new_prefix: kode,
+      });
+      setKode(kode);
+      setNoUrut(kodefk);
+    }
+    // mengambil kode lama
+    // membuat kodefikasi
+  };
+
+  useEffect(() => {
+    setBlankKwitansi();
+    if (tanggal && pilihItem) {
+      cekKode();
+    }
+    return () => {};
+  }, [pilihItem, tanggal]);
+
+  // terbilang
+  useEffect(() => {
+    setUang_terbilang(
+      jumlah ? angkaTerbilang(jumlah.replace(/\D/g, "")) + " rupiah" : ""
+    );
+
+    return () => {};
+  }, [jumlah]);
+
+  const reset = () => {
+    setPenerima("");
+    setJumlah("");
+    setUang_terbilang("");
+    setKode("");
+    setNoUrut("");
+    setTanggal("");
+    setKeperluan("");
+  };
+
+  const handleCetak = async () => {
+    const tgl_kwitansi = moment(tanggal).format("YYYY-MM-DD");
     const items = {
       kode,
-      unit: pilihItem && pilihItem.label,
-      penerima,
-      uang_terbilang,
-      keperluan,
-      tanggal: tgl_transaksi,
+      item_id: pilihItem && pilihItem.value,
+      jenis: "pengeluaran",
+      nm_penerima: penerima,
+      jumlah: jumlah.replace(/\D/g, ""),
+      terbilang: uang_terbilang,
+      tgl_kwitansi: tanggal && tgl_kwitansi,
+      no_urut: noUrut,
+      ket: keperluan,
     };
-    cetakKwitansiPengeluaran(items);
+    // console.log(items);
+    const res = await addData(items);
+    toastShow(res.data);
+    reset();
   };
   return (
     <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto inset-0 z-50 outline-none focus:outline-none">
+      <Toaster />
       <div className="w-full">
         {/*content*/}
         <div className="border-0 rounded-lg shadow-lg flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -52,11 +109,11 @@ const FormPengeluaran = () => {
                 <div className="col-span-12 md:col-span-6 mb-3 pt-0 flex flex-col gap-2">
                   <label htmlFor="kode">Kode Pengeluaran</label>
                   <input
-                    value={kode}
-                    onChange={(e) => setKode(e.target.value)}
+                    value={`${kode}-${noUrut}`}
+                    readOnly={true}
                     id="kode"
                     type="text"
-                    className="px-3 py-2 text-slate-600 bg-white rounded text-sm border shadow outline-none focus:outline-none focus:ring w-full"
+                    className="px-3 py-2 text-slate-600 bg-slate-100 rounded text-sm border shadow outline-none focus:outline-none focus:ring w-full"
                   />
                 </div>
                 {/* Penerima */}
@@ -70,6 +127,11 @@ const FormPengeluaran = () => {
                     className="px-3 py-2 text-slate-600 bg-white rounded text-sm border shadow outline-none focus:outline-none focus:ring w-full"
                   />
                 </div>
+                {/* Uang sejumlah */}
+                <div className="col-span-12 md:col-span-6 mb-3 pt-0 flex flex-col gap-2">
+                  <label htmlFor="jumlah">Jumlah Uang</label>
+                  <Rupiah setJumlah={setJumlah} jumlah={jumlah} />
+                </div>
                 {/* Uang sejumlah (Terbilang)? */}
                 <div className="col-span-12 md:col-span-6 mb-3 pt-0 flex flex-col gap-2">
                   <label htmlFor="uang_terbilang">
@@ -77,10 +139,10 @@ const FormPengeluaran = () => {
                   </label>
                   <input
                     value={uang_terbilang}
-                    onChange={(e) => setUang_terbilang(e.target.value)}
+                    readOnly={true}
                     id="uang_terbilang"
                     type="text"
-                    className="px-3 py-2 text-slate-600 bg-white rounded text-sm border shadow outline-none focus:outline-none focus:ring w-full"
+                    className="px-3 py-2 text-slate-600 bg-slate-100 rounded text-sm border shadow outline-none focus:outline-none focus:ring w-full"
                   />
                 </div>
                 {/* Untuk keperluan? */}

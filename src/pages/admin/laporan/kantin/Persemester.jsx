@@ -33,7 +33,7 @@ const Persemester = () => {
   const handleCetak = () => {
     window
       .open(
-        `${BASE_URL}/export/excel/transaksi?semester=${semester}&tahun=${tahun}`,
+        `${BASE_URL}/export/pdf/semester?semester=${semester}&tahun=${tahun}`,
         "_blank"
       )
       .focus();

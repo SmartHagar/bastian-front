@@ -33,7 +33,7 @@ const Perbulan = () => {
   const handleCetak = () => {
     window
       .open(
-        `${BASE_URL}/export/excel/transaksi?bulan=${bulan}&tahun=${tahun}`,
+        `${BASE_URL}/export/pdf/bulan?bulan=${bulan}&tahun=${tahun}`,
         "_blank"
       )
       .focus();

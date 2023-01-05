@@ -12,6 +12,7 @@ const kodefikasi = ({ old_prefix, new_prefix }) => {
   if (filterKode.length > 0) {
     no_urut = filterKode.map((row) => row.no_urut);
   }
+  console.log(filterKode);
   return parseInt(no_urut) + 1;
 };
 

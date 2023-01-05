@@ -11,16 +11,14 @@ const { exports } = useUrl();
 
 const useKwitansiPDF = create(
   devtools((set, get) => ({
-    cetakKwitansiPengeluaran: async (items) => {
-      console.log(items);
+    cetakKwitansiPengeluaran: async (id) => {
       // return;
       //
       try {
         const res = await exports({
           method: "post",
-          url: `/pdf/pengeluaran`,
+          url: `/pdf/pengeluaran/${id}`,
           responseType: "blob",
-          data: items,
         });
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");
@@ -36,15 +34,14 @@ const useKwitansiPDF = create(
         };
       }
     },
-    cetakKwitansiPemasukan: async (items) => {
+    cetakKwitansiPemasukan: async (id) => {
       // return;
       //
       try {
         const res = await exports({
           method: "post",
-          url: `/pdf/pemasukan`,
+          url: `/pdf/pemasukan/${id}`,
           responseType: "blob",
-          data: items,
         });
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");
