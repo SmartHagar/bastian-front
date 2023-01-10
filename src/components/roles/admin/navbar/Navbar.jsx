@@ -7,7 +7,7 @@ const Navbar = ({ showMenu }) => {
   return (
     <div>
       <div className="absolute h-14 left-2 z-50 flex items-center">
-        <div onClick={showMenu} className="cursor-pointer">
+        <div onClick={showMenu} className="cursor-pointer lg:hidden">
           <BsTextIndentLeft size={30} className="text-biru" />
         </div>
       </div>
