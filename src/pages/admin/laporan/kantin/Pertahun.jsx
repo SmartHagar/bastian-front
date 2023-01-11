@@ -31,7 +31,10 @@ const Pertahun = () => {
 
   const handleCetak = () => {
     window
-      .open(`${BASE_URL}/export/pdf/tahun?tahun=${tahun}`, "_blank")
+      .open(
+        `${BASE_URL}/export/pdf/tahun?tahun=${tahun}&kantin=kantin`,
+        "_blank"
+      )
       .focus();
     console.log("cetak");
   };
