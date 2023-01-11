@@ -1,12 +1,12 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import useBukuKas from "../../../store/api/buku-kas";
+import useBukuKas from "../../../../store/api/buku-kas";
 import Table from "./Table";
 
-import useUrl from "../../../services/base_url";
+import useUrl from "../../../../services/base_url";
 
-const BukuKas = () => {
+const Perbulan = () => {
   const { BASE_URL } = useUrl();
   // store
   const { setBukuKas, dtBukuKas } = useBukuKas();
@@ -16,7 +16,7 @@ const BukuKas = () => {
   // effect
   useEffect(() => {
     if (tahun && bulan) {
-      setBukuKas({ bulan, tahun });
+      setBukuKas({ bulan, tahun, kantin: true });
     }
   }, [bulan, tahun]);
 
@@ -33,7 +33,7 @@ const BukuKas = () => {
   const handleCetak = () => {
     window
       .open(
-        `${BASE_URL}/export/excel/transaksi?bulan=${bulan}&tahun=${tahun}`,
+        `${BASE_URL}/export/pdf/bulan?bulan=${bulan}&tahun=${tahun}&kantin=kantin`,
         "_blank"
       )
       .focus();
@@ -97,4 +97,4 @@ const BukuKas = () => {
   );
 };
 
-export default BukuKas;
+export default Perbulan;

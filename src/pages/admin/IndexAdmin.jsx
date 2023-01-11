@@ -12,9 +12,10 @@ const IndexAdmin = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const user_login = JSON.parse(localStorage.getItem("user_login"));
+    console.log(user_login);
     if (user_login) {
       const { role } = user_login;
-      if (role === "ketua") {
+      if (role === "pimpinan") {
         navigate("/ketua/dashboard");
       }
     } else {

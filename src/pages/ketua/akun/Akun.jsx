@@ -14,6 +14,7 @@ const Akun = () => {
   // state
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [email, setEmail] = useState("");
   // store
   const { setGantiPassword } = useLogin();
   // ganti passpowd
@@ -23,6 +24,7 @@ const Akun = () => {
       id: user_login.user_id,
       password,
       password_baru: newPassword,
+      email,
     };
 
     const ganti = await setGantiPassword(items);
@@ -45,10 +47,23 @@ const Akun = () => {
         <h1 className="uppercase text-center font-bold text-biru text-xl">
           fakultas sanis dan teknologi
         </h1>
-        <h3 className="text-center mt-10 text-lg font-bold">Ganti Password</h3>
+        <h3 className="text-center mt-10 text-lg font-bold">
+          Ganti Email dan Password
+        </h3>
       </div>
       <div className="w-96 mx-auto mt-5">
         <form onSubmit={handleSimpan}>
+          <div className="mb-3 pt-0 flex flex-col gap-2">
+            <label htmlFor="email">Email Baru</label>
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              id="email"
+              type="email"
+              className="px-3 py-2 text-slate-600 relative bg-white rounded text-sm border shadow outline-none focus:outline-none focus:ring w-full"
+              autoComplete="off"
+            />
+          </div>
           <div className="mb-3 pt-0 flex flex-col gap-2">
             <label htmlFor="password">Password Lama</label>
             <input

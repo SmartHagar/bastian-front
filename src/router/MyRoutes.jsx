@@ -34,8 +34,16 @@ import Register from "../pages/auth/Register";
 // ketua pages
 import IndexKetua from "../pages/ketua/IndexKetua";
 import DashboardKetua from "../pages/ketua/dashboard/Dashboard";
-import BukuKasKetua from "../pages/ketua/laporan/BukuKas";
 import AkunKetua from "../pages/ketua/akun/Akun";
+import KwitansiKetua from "../pages/ketua/kwitansi/Kwitansi";
+
+import BukuKasPerbulanKetua from "../pages/ketua/laporan/buku-kas/Perbulan";
+import BukuKasPersemesterKetua from "../pages/ketua/laporan/buku-kas/Persemester";
+import BukuKasPertahunKetua from "../pages/ketua/laporan/buku-kas/Pertahun";
+// kantin
+import KantinPerbulanKetua from "../pages/ketua/laporan/kantin/Perbulan";
+import KantinPersemesterKetua from "../pages/ketua/laporan/kantin/Persemester";
+import KantinPertahunKetua from "../pages/ketua/laporan/kantin/Pertahun";
 
 // error
 import NotFound from "../pages/errors/NotFound";
@@ -86,8 +94,18 @@ const MyRoutes = () => {
         <Route path="ketua" element={<IndexKetua />}>
           <Route path="dashboard" element={<DashboardKetua />} />
           <Route path="akun" element={<AkunKetua />} />
+          <Route path="kwitansi" element={<KwitansiKetua />} />
           <Route path="laporan">
-            <Route path="buku-kas" element={<BukuKasKetua />} />
+            <Route path="buku-kas">
+              <Route path="perbulan" element={<BukuKasPerbulanKetua />} />
+              <Route path="persemester" element={<BukuKasPersemesterKetua />} />
+              <Route path="pertahun" element={<BukuKasPertahunKetua />} />
+            </Route>
+            <Route path="kantin">
+              <Route path="perbulan" element={<KantinPerbulanKetua />} />
+              <Route path="persemester" element={<KantinPersemesterKetua />} />
+              <Route path="pertahun" element={<KantinPertahunKetua />} />
+            </Route>
           </Route>
         </Route>
 
