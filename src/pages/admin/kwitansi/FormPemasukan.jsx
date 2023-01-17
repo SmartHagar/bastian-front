@@ -19,6 +19,7 @@ const FormPemasukan = () => {
   const [kode, setKode] = useState("");
   const [pilihItem, setPilihItem] = useState("");
   const [penerima, setPenerima] = useState("");
+  const [bendahara, setBendahara] = useState("");
   const [uang_terbilang, setUang_terbilang] = useState("");
   const [tanggal, setTanggal] = useState("");
   const [jumlah, setJumlah] = useState("");
@@ -65,6 +66,7 @@ const FormPemasukan = () => {
     setKode("");
     setNoUrut("");
     setTanggal("");
+    setBendahara("");
   };
 
   const handleCetak = async () => {
@@ -78,6 +80,7 @@ const FormPemasukan = () => {
       terbilang: uang_terbilang,
       tgl_kwitansi: tanggal && tgl_kwitansi,
       no_urut: noUrut,
+      bendahara,
     };
     // console.log(items);
     const res = await addData(items);
@@ -91,7 +94,7 @@ const FormPemasukan = () => {
         {/*content*/}
         <div className="border-0 rounded-lg shadow-lg flex flex-col w-full bg-white outline-none focus:outline-none">
           {/*body*/}
-          <div className="px-6 py-3 flex-auto max-h-96">
+          <div className="px-6 py-3 flex-auto man-h-96">
             <form onSubmit={handleCetak}>
               <div className="grid grid-cols-12 gap-4">
                 {/* Item */}
@@ -149,6 +152,18 @@ const FormPemasukan = () => {
                     selected={tanggal}
                     onChange={setTanggal}
                     dateFormat="dd MMMM yyyy"
+                  />
+                </div>
+                {/* Bendahara */}
+                <div className="col-span-12 mb-3 pt-0 flex flex-col gap-2">
+                  <label htmlFor="bendahara">Bendahara</label>
+                  <input
+                    value={bendahara}
+                    onChange={(e) => setBendahara(e.target.value)}
+                    id="bendahara"
+                    type="text"
+                    autoComplete={true}
+                    className="px-3 py-2 text-slate-600 bg-white rounded text-sm border shadow outline-none focus:outline-none focus:ring w-full"
                   />
                 </div>
               </div>

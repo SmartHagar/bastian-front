@@ -19,6 +19,7 @@ const FormPengeluaran = () => {
   const [kode, setKode] = useState("");
   const [pilihItem, setPilihItem] = useState("");
   const [penerima, setPenerima] = useState("");
+  const [bendahara, setBendahara] = useState("");
   const [uang_terbilang, setUang_terbilang] = useState("");
   const [tanggal, setTanggal] = useState("");
   const [jumlah, setJumlah] = useState("");
@@ -67,6 +68,7 @@ const FormPengeluaran = () => {
     setNoUrut("");
     setTanggal("");
     setKeperluan("");
+    setBendahara("");
   };
 
   const handleCetak = async () => {
@@ -81,6 +83,7 @@ const FormPengeluaran = () => {
       tgl_kwitansi: tanggal && tgl_kwitansi,
       no_urut: noUrut,
       ket: keperluan,
+      bendahara,
     };
     // console.log(items);
     const res = await addData(items);
@@ -163,6 +166,17 @@ const FormPengeluaran = () => {
                     selected={tanggal}
                     onChange={setTanggal}
                     dateFormat="dd MMMM yyyy"
+                  />
+                </div>
+                {/* Bendahara */}
+                <div className="col-span-12 md:col-span-6 mb-3 pt-0 flex flex-col gap-2">
+                  <label htmlFor="bendahara">Bendahara</label>
+                  <input
+                    value={bendahara}
+                    onChange={(e) => setBendahara(e.target.value)}
+                    id="bendahara"
+                    type="text"
+                    className="px-3 py-2 text-slate-600 bg-white rounded text-sm border shadow outline-none focus:outline-none focus:ring w-full"
                   />
                 </div>
               </div>
