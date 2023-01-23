@@ -48,6 +48,10 @@ import KantinPertahunKetua from "../pages/ketua/laporan/kantin/Pertahun";
 // error
 import NotFound from "../pages/errors/NotFound";
 
+// staf
+import IndexStaf from "../pages/staf/IndexStaf";
+import DashboardStaf from "../pages/staf/dashboard/Dashboard";
+
 const MyRoutes = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -107,6 +111,33 @@ const MyRoutes = () => {
               <Route path="pertahun" element={<KantinPertahunKetua />} />
             </Route>
           </Route>
+        </Route>
+        {/* user pages */}
+        <Route path="staf" element={<IndexStaf />}>
+          <Route path="dashboard" element={<DashboardStaf />} />
+          <Route path="unit" element={<UnitAdmin />} />
+          <Route path="transaksi">
+            <Route path=":jenis" element={<TransaksiAdmin />} />
+            <Route path=":jenis/:transaksi_id" element={<GambarAdmin />} />
+          </Route>
+          <Route path="kantin">
+            <Route path=":jenis" element={<TransaksiKantinAdmin />} />
+            <Route path=":jenis/:transaksi_id" element={<GambarAdmin />} />
+          </Route>
+          <Route path="kwitansi" element={<KwitansiAdmin />} />
+          <Route path="laporan">
+            <Route path="buku-kas">
+              <Route path="perbulan" element={<BukuKasPerbulanAdmin />} />
+              <Route path="persemester" element={<BukuKasPersemesterAdmin />} />
+              <Route path="pertahun" element={<BukuKasPertahunAdmin />} />
+            </Route>
+            <Route path="kantin">
+              <Route path="perbulan" element={<KantinPerbulanAdmin />} />
+              <Route path="persemester" element={<KantinPersemesterAdmin />} />
+              <Route path="pertahun" element={<KantinPertahunAdmin />} />
+            </Route>
+          </Route>
+          <Route path="akun" element={<AkunAdmin />} />
         </Route>
 
         {/* not found */}

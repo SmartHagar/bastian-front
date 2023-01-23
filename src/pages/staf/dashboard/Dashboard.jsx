@@ -14,7 +14,7 @@ const Dashboard = () => {
   useEffect(() => {
     setIsLoading(true);
     const fetch = async () => {
-      await setSaldo();
+      await setSaldo("kantin");
       setIsLoading(false);
     };
     fetch();
@@ -47,7 +47,7 @@ const Dashboard = () => {
                   <h2 className="text-biru text-xl">Pemasukan Terakhir</h2>
                   <div className="border p-2 rounded-lg">
                     <p className="text-gray-600 text-xl">
-                      {pemasukanTerakhir?.item?.nama}
+                      {pemasukanTerakhir?.ket}
                     </p>
                     <p className="text-merah font-Charmonman text-xl">
                       {showRupiah(parseInt(pemasukanTerakhir?.jumlah))}
@@ -58,7 +58,7 @@ const Dashboard = () => {
                   <h2 className="text-biru text-xl">Pengeluaran Terakhir</h2>
                   <div className="border p-2 rounded-lg">
                     <p className="text-gray-600 text-xl">
-                      {pengeluaranTerakhir?.item?.nama}
+                      {pengeluaranTerakhir?.ket}
                     </p>
                     <p className="text-merah font-Charmonman text-xl">
                       {showRupiah(parseInt(pengeluaranTerakhir?.jumlah))}

@@ -8,8 +8,11 @@ import toastSuccess from "../../../services/toast-success";
 import Form from "./Form";
 import SkletonImg from "../../../components/loading/SkletonImg";
 import Swal from "sweetalert2";
+import useUrl from "../../../services/base_url";
 
 const Gambar = () => {
+  const { BASE_URL } = useUrl();
+
   // params
   const { transaksi_id } = useParams();
   // storage
@@ -44,6 +47,16 @@ const Gambar = () => {
         }
       }
     });
+  };
+
+  const handleCetak = (transaksi_id) => {
+    window
+      .open(
+        `${BASE_URL}/export/pdf/gambar-kwitansi?transaksi_id=${transaksi_id}`,
+        "_blank"
+      )
+      .focus();
+    console.log("cetak");
   };
 
   const showImage = () => {
@@ -94,15 +107,28 @@ const Gambar = () => {
       {/* header */}
       <div className="flex justify-between mb-2">
         <p>Silahkan menambah dan menghapus data gambar kwitansi</p>
-        <button
-          className="bg-biru text-white active:bg-biru font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-          onClick={() => {
-            setShowModal(true);
-          }}
-        >
-          Tambah Data
-        </button>
+        <div>
+          <button
+            className="bg-biru text-white active:bg-biru font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="button"
+            onClick={() => {
+              setShowModal(true);
+            }}
+          >
+            Tambah Data
+          </button>
+          {dtKwitansi.length > 0 && (
+            <button
+              className="bg-merah text-white active:bg-biru font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
+              onClick={() => {
+                handleCetak(dtKwitansi[0].transaksi_id);
+              }}
+            >
+              Cetak
+            </button>
+          )}
+        </div>
       </div>
       {isLoading ? (
         <div className="w-1/3 flex gap-2">

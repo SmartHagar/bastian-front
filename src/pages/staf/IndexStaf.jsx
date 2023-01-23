@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import Navbar from "../../components/roles/admin/navbar/Navbar";
-import Sidebar from "../../components/roles/admin/sidebar/Sidebar";
+import Navbar from "../../components/roles/staf/navbar/Navbar";
+import Sidebar from "../../components/roles/staf/sidebar/Sidebar";
 
-const IndexAdmin = () => {
+const IndexStaf = () => {
   // state
   const [menu, setMenu] = useState(false);
   // navigate
@@ -17,8 +17,8 @@ const IndexAdmin = () => {
       const { role } = user_login;
       if (role === "pimpinan") {
         navigate("/ketua/dashboard");
-      } else if (role === "staf") {
-        navigate("/staf/dashboard");
+      } else if (role === "bendahara") {
+        navigate("/bendahara/dashboard");
       }
     } else {
       navigate("/auth/login");
@@ -55,4 +55,4 @@ const IndexAdmin = () => {
   );
 };
 
-export default IndexAdmin;
+export default IndexStaf;

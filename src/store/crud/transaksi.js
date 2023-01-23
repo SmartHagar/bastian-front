@@ -13,10 +13,7 @@ const useTransaksi = create(
   devtools((set, get) => ({
     dtTransaksi: [],
     responses: [],
-    setTransaksi: async (
-      cari = { search: "", provinsi_id: "", kantin: false },
-      jenis = ""
-    ) => {
+    setTransaksi: async (cari = { search: "", kantin: false }, jenis = "") => {
       try {
         const response = await crud({
           method: "get",
@@ -25,9 +22,9 @@ const useTransaksi = create(
           params: {
             jenis,
             search: cari.search,
-            provinsi_id: cari.provinsi_id,
           },
         });
+        console.log(response);
         const { data } = response;
         let filterKantin;
         // filter data tanpa kantin

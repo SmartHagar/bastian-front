@@ -14,6 +14,8 @@ const IndexKetua = () => {
       const { role } = user_login;
       if (role === "admin") {
         navigate("/admin/dashboard");
+      } else if (role === "staf") {
+        navigate("/staf/dashboard");
       }
     } else {
       navigate("/auth/login");

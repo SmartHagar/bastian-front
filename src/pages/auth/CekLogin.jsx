@@ -14,6 +14,8 @@ const CekLogin = () => {
         navigate("/admin/dashboard");
       } else if (role === "pimpinan") {
         navigate("/ketua/dashboard");
+      } else if (role === "staf") {
+        navigate("/staf/dashboard");
       } else {
         // delete user login
         localStorage.removeItem("user_login");
