@@ -51,14 +51,14 @@ export const ListMenu = () => {
         <span className="font-bold uppercase">Cetak</span>
       </div>
       <nav aria-label="Main Nav" className="flex flex-col space-y-1 nav-admin">
-        <NavLink
+        {/* <NavLink
           to="/ketua/kwitansi"
           className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
         >
           <BiImport size={20} />
 
           <span className="ml-3 text-sm"> Kwitansi </span>
-        </NavLink>
+        </NavLink> */}
         {/* buku kas */}
         <details className="group" open={pathName[3] === "buku-kas" && true}>
           <summary className="flex cursor-pointer items-center rounded-lg px-4 py-2 text-merah hover:text-kuning">

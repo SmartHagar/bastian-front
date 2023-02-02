@@ -9,6 +9,7 @@ import Form from "./Form";
 import SkletonImg from "../../../components/loading/SkletonImg";
 import Swal from "sweetalert2";
 import useUrl from "../../../services/base_url";
+import axios from "axios";
 
 const Gambar = () => {
   const { BASE_URL } = useUrl();
@@ -58,6 +59,23 @@ const Gambar = () => {
       .focus();
     console.log("cetak");
   };
+  const handleCetakOne = (row) => {
+    let printWindow = window.open(
+      "",
+      "",
+      "left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0"
+    );
+    printWindow.document.write(
+      "<html><head><title>Gambar</title><style>body {margin: 0;}</style></head><body><img src='" +
+        row.gambar +
+        "' /></body></html>"
+    );
+
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+    printWindow.close();
+  };
 
   const showImage = () => {
     if (dtKwitansi.length > 0) {
@@ -73,6 +91,13 @@ const Gambar = () => {
                 />
               </div>
               <div className="mt-4 sm:flex sm:items-center sm:justify-center sm:gap-4">
+                <button
+                  onClick={() => handleCetakOne(row)}
+                  type="button"
+                  className="py-2 px-3 text-xs text-center hover:text-white border border-biru hover:bg-biru focus:ring-1 rounded-lg"
+                >
+                  Cetak
+                </button>
                 <button
                   onClick={() => handleDelete(row.id)}
                   type="button"
