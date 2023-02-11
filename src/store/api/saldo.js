@@ -13,12 +13,15 @@ const useSaldo = create(
     transaksi: [],
     pemasukanTerakhir: [],
     pengeluaranTerakhir: [],
-    setSaldo: async (kantin = false) => {
+    setSaldo: async (kantin = 0) => {
       //   const getToken = JSON.parse(localStorage.getItem("token"));
       try {
         const res = await api({
           method: "get",
           url: `/buku-kas/saldo`,
+          params: {
+            kantin,
+          },
           //   headers: { Authorization: `Bearer ${getToken}` },
         });
         const { data } = res;

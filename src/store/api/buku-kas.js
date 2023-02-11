@@ -28,7 +28,7 @@ const useBukuKas = create(
       }
       return filterKantin;
     },
-    setBukuKas: async ({ bulan, tahun, kantin = false }) => {
+    setBukuKas: async ({ bulan, tahun, kantin = 0 }) => {
       //   const getToken = JSON.parse(localStorage.getItem("token"));
       try {
         const res = await api({
@@ -37,6 +37,7 @@ const useBukuKas = create(
           params: {
             bulan,
             tahun,
+            kantin,
           },
           //   headers: { Authorization: `Bearer ${getToken}` },
         });
@@ -56,7 +57,7 @@ const useBukuKas = create(
         };
       }
     },
-    setBukuKasSemester: async ({ tahun, semester, kantin = false }) => {
+    setBukuKasSemester: async ({ tahun, semester, kantin = 0 }) => {
       //   const getToken = JSON.parse(localStorage.getItem("token"));
       try {
         const res = await api({
@@ -65,6 +66,7 @@ const useBukuKas = create(
           params: {
             tahun,
             semester,
+            kantin,
           },
           //   headers: { Authorization: `Bearer ${getToken}` },
         });
@@ -84,7 +86,7 @@ const useBukuKas = create(
         };
       }
     },
-    setBukuKasTahun: async ({ tahun, kantin = false }) => {
+    setBukuKasTahun: async ({ tahun, kantin = 0 }) => {
       //   const getToken = JSON.parse(localStorage.getItem("token"));
       try {
         const res = await api({
@@ -92,6 +94,7 @@ const useBukuKas = create(
           url: `/buku-kas/laporan/tahun`,
           params: {
             tahun,
+            kantin,
           },
           //   headers: { Authorization: `Bearer ${getToken}` },
         });
@@ -120,6 +123,7 @@ const useBukuKas = create(
           params: {
             bulan,
             tahun,
+            kantin,
           },
           //   headers: { Authorization: `Bearer ${getToken}` },
         });
