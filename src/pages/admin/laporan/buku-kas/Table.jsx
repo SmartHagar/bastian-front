@@ -6,7 +6,7 @@
 import React from "react";
 import showRupiah from "../../../../services/rupiah";
 
-const Table = ({ dataKas }) => {
+const Table = ({ dataKas, perhari }) => {
   let sisaSaldo;
   // hitung sisa saldo
   const hitungSisa = () => {
@@ -68,9 +68,12 @@ const Table = ({ dataKas }) => {
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                     {ket}
                   </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                    {tgl_transaksi}
-                  </td>
+                  {!perhari && (
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                      {tgl_transaksi}
+                    </td>
+                  )}
+
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                     {pemasukan && showRupiah(pemasukan)}
                   </td>
@@ -85,7 +88,7 @@ const Table = ({ dataKas }) => {
             })}
           <tr className="divide-x divide-gray-200">
             <td
-              colSpan={4}
+              colSpan={perhari ? 3 : 4}
               className="whitespace-nowrap px-4 py-2 font-medium text-gray-900"
             >
               Total
@@ -120,9 +123,13 @@ const Table = ({ dataKas }) => {
               <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-white">
                 Uraian
               </th>
-              <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-white">
-                Tgl. Transaksi
-              </th>
+
+              {!perhari && (
+                <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-white">
+                  Tgl. Transaksi
+                </th>
+              )}
+
               <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-white">
                 Pemasukan
               </th>
@@ -146,7 +153,7 @@ const Table = ({ dataKas }) => {
 
               <td
                 className="whitespace-nowrap px-4 py-2 text-gray-700 text-right"
-                colSpan={3}
+                colSpan={perhari ? 2 : 3}
               >
                 {hitungSisa()}
               </td>

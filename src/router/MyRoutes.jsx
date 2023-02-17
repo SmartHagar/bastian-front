@@ -17,6 +17,7 @@ import TransaksiAdmin from "../pages/admin/transaksi/Transaksi";
 import TransaksiKantinAdmin from "../pages/admin/kantin/Kantin";
 import GambarAdmin from "../pages/admin/gambar/Gambar";
 import KwitansiAdmin from "../pages/admin/kwitansi/Kwitansi";
+import BukuKasPerhariAdmin from "../pages/admin/laporan/buku-kas/Perhari";
 import BukuKasPerbulanAdmin from "../pages/admin/laporan/buku-kas/Perbulan";
 import BukuKasPersemesterAdmin from "../pages/admin/laporan/buku-kas/Persemester";
 import BukuKasPertahunAdmin from "../pages/admin/laporan/buku-kas/Pertahun";
@@ -82,15 +83,17 @@ const MyRoutes = () => {
           <Route path="kwitansi" element={<KwitansiAdmin />} />
           <Route path="laporan">
             <Route path="buku-kas">
+              <Route path="perhari" element={<BukuKasPerhariAdmin />} />
               <Route path="perbulan" element={<BukuKasPerbulanAdmin />} />
               <Route path="persemester" element={<BukuKasPersemesterAdmin />} />
               <Route path="pertahun" element={<BukuKasPertahunAdmin />} />
             </Route>
-            <Route path="kantin">
+            {/* <Route path="kantin">
+              <Route path="perhari" element={<KantinPerhariAdmin />} />
               <Route path="perbulan" element={<KantinPerbulanAdmin />} />
               <Route path="persemester" element={<KantinPersemesterAdmin />} />
               <Route path="pertahun" element={<KantinPertahunAdmin />} />
-            </Route>
+            </Route> */}
           </Route>
           <Route path="akun" element={<AkunAdmin />} />
         </Route>

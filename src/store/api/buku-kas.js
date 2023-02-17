@@ -57,6 +57,36 @@ const useBukuKas = create(
         };
       }
     },
+    setBukuKasPerhari: async ({ perhari, bulan, tahun, kantin = 0 }) => {
+      //   const getToken = JSON.parse(localStorage.getItem("token"));
+      try {
+        const res = await api({
+          method: "get",
+          url: `/buku-kas/laporan/perhari`,
+          params: {
+            tanggal: perhari,
+            bulan,
+            tahun,
+            kantin,
+          },
+          //   headers: { Authorization: `Bearer ${getToken}` },
+        });
+        const { data } = res;
+        // filter data kantin
+        const dataFilter = get().filterKantin({ data, kantin });
+        set((state) => ({ ...state, responses: res }));
+        set((state) => ({ ...state, dtBukuKas: dataFilter }));
+        return {
+          status: "berhasil",
+          data: res.data,
+        };
+      } catch (error) {
+        return {
+          status: "error",
+          error: error.response.data,
+        };
+      }
+    },
     setBukuKasSemester: async ({ tahun, semester, kantin = 0 }) => {
       //   const getToken = JSON.parse(localStorage.getItem("token"));
       try {
