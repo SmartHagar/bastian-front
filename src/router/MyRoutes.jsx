@@ -22,6 +22,7 @@ import BukuKasPerbulanAdmin from "../pages/admin/laporan/buku-kas/Perbulan";
 import BukuKasPersemesterAdmin from "../pages/admin/laporan/buku-kas/Persemester";
 import BukuKasPertahunAdmin from "../pages/admin/laporan/buku-kas/Pertahun";
 // kantin
+import KantinPerhariAdmin from "../pages/admin/laporan/kantin/Perhari";
 import KantinPerbulanAdmin from "../pages/admin/laporan/kantin/Perbulan";
 import KantinPersemesterAdmin from "../pages/admin/laporan/kantin/Persemester";
 import KantinPertahunAdmin from "../pages/admin/laporan/kantin/Pertahun";
@@ -129,12 +130,14 @@ const MyRoutes = () => {
           </Route>
           <Route path="kwitansi" element={<KwitansiAdmin />} />
           <Route path="laporan">
-            <Route path="buku-kas">
+            {/* <Route path="buku-kas">
+              <Route path="perbulan" element={<BukuKasPerbulanAdmin />} />
               <Route path="perbulan" element={<BukuKasPerbulanAdmin />} />
               <Route path="persemester" element={<BukuKasPersemesterAdmin />} />
               <Route path="pertahun" element={<BukuKasPertahunAdmin />} />
-            </Route>
+            </Route> */}
             <Route path="kantin">
+              <Route path="perhari" element={<KantinPerhariAdmin />} />
               <Route path="perbulan" element={<KantinPerbulanAdmin />} />
               <Route path="persemester" element={<KantinPersemesterAdmin />} />
               <Route path="pertahun" element={<KantinPertahunAdmin />} />

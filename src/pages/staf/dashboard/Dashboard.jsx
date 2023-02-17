@@ -50,7 +50,9 @@ const Dashboard = () => {
                       {pemasukanTerakhir?.ket}
                     </p>
                     <p className="text-merah font-Charmonman text-xl">
-                      {showRupiah(parseInt(pemasukanTerakhir?.jumlah))}
+                      {pemasukanTerakhir?.jumlah
+                        ? showRupiah(parseInt(pemasukanTerakhir?.jumlah))
+                        : 0}
                     </p>
                   </div>
                 </div>
@@ -61,7 +63,9 @@ const Dashboard = () => {
                       {pengeluaranTerakhir?.ket}
                     </p>
                     <p className="text-merah font-Charmonman text-xl">
-                      {showRupiah(parseInt(pengeluaranTerakhir?.jumlah))}
+                      {pengeluaranTerakhir?.jumlah
+                        ? showRupiah(parseInt(pengeluaranTerakhir?.jumlah))
+                        : 0}
                     </p>
                   </div>
                 </div>

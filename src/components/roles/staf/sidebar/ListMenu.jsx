@@ -115,18 +115,25 @@ export const ListMenu = () => {
 
           <nav aria-label="kantin Nav" className="mt-1.5 ml-8 flex flex-col">
             <NavLink
+              to="/staf/laporan/kantin/perhari"
+              className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
+            >
+              <span className="ml-3 text-sm"> Perhari </span>
+            </NavLink>
+
+            <NavLink
               to="/staf/laporan/kantin/perbulan"
               className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
             >
               <span className="ml-3 text-sm"> Perbulan </span>
             </NavLink>
 
-            <NavLink
+            {/* <NavLink
               to="/staf/laporan/kantin/persemester"
               className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
             >
               <span className="ml-3 text-sm"> Persemester </span>
-            </NavLink>
+            </NavLink> */}
 
             <NavLink
               to="/staf/laporan/kantin/pertahun"
