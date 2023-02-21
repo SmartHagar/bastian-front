@@ -168,12 +168,12 @@ export const ListMenu = () => {
           </summary>
 
           <nav aria-label="buku-kas Nav" className="mt-1.5 ml-8 flex flex-col">
-            <NavLink
+            {/* <NavLink
               to="/admin/laporan/buku-kas/perhari"
               className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
             >
               <span className="ml-3 text-sm"> Perhari </span>
-            </NavLink>
+            </NavLink> */}
 
             <NavLink
               to="/admin/laporan/buku-kas/perbulan"
@@ -182,12 +182,12 @@ export const ListMenu = () => {
               <span className="ml-3 text-sm"> Perbulan </span>
             </NavLink>
             {/* per semester */}
-            {/* <NavLink
+            <NavLink
               to="/admin/laporan/buku-kas/persemester"
               className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
             >
               <span className="ml-3 text-sm"> Persemester </span>
-            </NavLink> */}
+            </NavLink>
 
             <NavLink
               to="/admin/laporan/buku-kas/pertahun"
