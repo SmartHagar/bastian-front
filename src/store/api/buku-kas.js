@@ -153,7 +153,6 @@ const useBukuKas = create(
           params: {
             bulan,
             tahun,
-            kantin,
           },
           //   headers: { Authorization: `Bearer ${getToken}` },
         });
@@ -166,7 +165,7 @@ const useBukuKas = create(
       } catch (error) {
         return {
           status: "error",
-          error: error.response.data,
+          error: error.response?.data,
         };
       }
     },

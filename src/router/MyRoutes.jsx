@@ -111,6 +111,7 @@ const MyRoutes = () => {
             </Route>
             <Route path="kantin">
               <Route path="perbulan" element={<KantinPerbulanKetua />} />
+              <Route path="perhari" element={<KantinPerhariAdmin />} />
               <Route path="persemester" element={<KantinPersemesterKetua />} />
               <Route path="pertahun" element={<KantinPertahunKetua />} />
             </Route>

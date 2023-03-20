@@ -13,14 +13,20 @@ const Perhari = () => {
   const { setBukuKasPerhari, dtBukuKas } = useBukuKas();
   // state
   const [hari, setHari] = useState(null);
-  let perhari = null;
+  const [bulan, setBulan] = useState(null);
+  const [tahun, setTahun] = useState(null);
+  const [perhari, setPerhari] = useState(null);
+
   // effect
   useEffect(() => {
     if (hari) {
-      perhari = moment(hari).format("DD");
+      const perhari = moment(hari).format("DD");
       const bulan = moment(hari).format("MM");
       const tahun = moment(hari).format("YYYY");
       setBukuKasPerhari({ bulan, tahun, perhari, kantin: true });
+      setPerhari(perhari);
+      setBulan(bulan);
+      setTahun(tahun);
     }
   }, [hari]);
 

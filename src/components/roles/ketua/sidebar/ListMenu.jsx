@@ -126,10 +126,10 @@ export const ListMenu = () => {
 
           <nav aria-label="kantin Nav" className="mt-1.5 ml-8 flex flex-col">
             <NavLink
-              to="/ketua/laporan/kantin/perbulan"
+              to="/ketua/laporan/kantin/perhari"
               className="flex items-center rounded-lg px-4 py-2 text-merah hover:text-kuning"
             >
-              <span className="ml-3 text-sm"> Perbulan </span>
+              <span className="ml-3 text-sm"> Perhari </span>
             </NavLink>
 
             <NavLink
