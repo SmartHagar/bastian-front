@@ -43,7 +43,7 @@ const Perhari = () => {
   const handleCetak = () => {
     window
       .open(
-        `${BASE_URL}/export/pdf/bulan?tanggal=${perhari}&bulan=${bulan}&tahun=${tahun}`,
+        `${BASE_URL}/export/pdf/hari?tanggal=${perhari}&bulan=${bulan}&tahun=${tahun}&kantin=kantin`,
         "_blank"
       )
       .focus();
